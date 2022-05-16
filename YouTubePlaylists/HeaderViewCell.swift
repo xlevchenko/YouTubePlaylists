@@ -9,7 +9,7 @@ import UIKit
 
 class HeaderViewCell: UICollectionViewCell {
     
-    static let reuseIdentifier = "headerImageViewCell"
+    static let headerViewIdentifier = "headerImageViewCell"
     
     let imageView: UIImageView = {
         let imageView = UIImageView()
@@ -72,7 +72,7 @@ class HeaderViewCell: UICollectionViewCell {
             imageView.leadingAnchor.constraint(equalTo: self.leadingAnchor),
             imageView.trailingAnchor.constraint(equalTo: self.trailingAnchor),
             imageView.widthAnchor.constraint(equalTo: self.widthAnchor),
-            imageView.heightAnchor.constraint(equalToConstant: 230),
+            imageView.heightAnchor.constraint(equalTo: self.heightAnchor),
             
             playButton.topAnchor.constraint(equalTo: imageView.topAnchor, constant: 15),
             playButton.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 15),
