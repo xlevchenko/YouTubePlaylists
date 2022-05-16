@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		601018F2283177F400DF7BA9 /* SectionKind.swift in Sources */ = {isa = PBXBuildFile; fileRef = 601018F1283177F400DF7BA9 /* SectionKind.swift */; };
+		601018F42831940900DF7BA9 /* HeaderViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 601018F32831940900DF7BA9 /* HeaderViewCell.swift */; };
 		605399D328316885007444C9 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 605399D228316885007444C9 /* AppDelegate.swift */; };
 		605399D528316885007444C9 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 605399D428316885007444C9 /* SceneDelegate.swift */; };
 		605399D728316885007444C9 /* PlaylistViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 605399D628316885007444C9 /* PlaylistViewController.swift */; };
@@ -15,6 +17,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		601018F1283177F400DF7BA9 /* SectionKind.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SectionKind.swift; sourceTree = "<group>"; };
+		601018F32831940900DF7BA9 /* HeaderViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeaderViewCell.swift; sourceTree = "<group>"; };
 		605399CF28316885007444C9 /* YouTubePlaylists.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = YouTubePlaylists.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		605399D228316885007444C9 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		605399D428316885007444C9 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -56,7 +60,9 @@
 			children = (
 				605399D228316885007444C9 /* AppDelegate.swift */,
 				605399D428316885007444C9 /* SceneDelegate.swift */,
+				601018F1283177F400DF7BA9 /* SectionKind.swift */,
 				605399D628316885007444C9 /* PlaylistViewController.swift */,
+				601018F32831940900DF7BA9 /* HeaderViewCell.swift */,
 				605399DB28316886007444C9 /* Assets.xcassets */,
 				605399DD28316886007444C9 /* LaunchScreen.storyboard */,
 				605399E028316886007444C9 /* Info.plist */,
@@ -137,6 +143,8 @@
 				605399D728316885007444C9 /* PlaylistViewController.swift in Sources */,
 				605399D328316885007444C9 /* AppDelegate.swift in Sources */,
 				605399D528316885007444C9 /* SceneDelegate.swift in Sources */,
+				601018F2283177F400DF7BA9 /* SectionKind.swift in Sources */,
+				601018F42831940900DF7BA9 /* HeaderViewCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
