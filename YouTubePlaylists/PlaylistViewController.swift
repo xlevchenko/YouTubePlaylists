@@ -12,11 +12,11 @@ class PlaylistViewController: UIViewController {
     
     var collectionView: UICollectionView!
     
-    typealias DataSource = UICollectionViewDiffableDataSource<SectionKind, Int>
+    typealias DataSource = UICollectionViewDiffableDataSource<SectionItem, Int>
+    typealias Snapshot = NSDiffableDataSourceSnapshot<SectionItem, Int>
     var dataSource: DataSource!
-    
+        
     private let pagingInfoSubject = PassthroughSubject<PagingInfo, Never>()
-
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -48,7 +48,10 @@ extension PlaylistViewController {
         //register cell and reusable view
         collectionView.register(HeaderViewCell.self, forCellWithReuseIdentifier: HeaderViewCell.headerViewIdentifier)
         collectionView.register(PagingSectionFooterView.self, forSupplementaryViewOfKind: UICollectionView.elementKindSectionFooter, withReuseIdentifier: PagingSectionFooterView.pagingIdentifier)
+        collectionView.register(LabelCell.self, forCellWithReuseIdentifier: LabelCell.lableIdentifier)
+        collectionView.register(LabelSectionHeadrReusableView.self, forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: LabelSectionHeadrReusableView.labelSectionIdentifier)
         
+        collectionView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
         collectionView.backgroundColor = #colorLiteral(red: 0.1098, green: 0.1059, blue: 0.149, alpha: 1)
         view.addSubview(collectionView)
     }
@@ -61,7 +64,7 @@ extension PlaylistViewController {
         let layout = UICollectionViewCompositionalLayout { sectionIndex, layoutEnvironment in
             
             //find out what section we are working with
-            guard let sectionType = SectionKind(rawValue: sectionIndex) else { return nil }
+            guard let sectionType = SectionItem(rawValue: sectionIndex) else { return nil }
             
             //how many colums
             let coulumCount = sectionType.columnCount // 1 or 2
@@ -80,9 +83,19 @@ extension PlaylistViewController {
             //scroling section
             section.orthogonalScrollingBehavior = .groupPaging
             
-            //configure the footer view
-            let pageFooterSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0), heightDimension: .absolute(20))
+            //configure the LabelSectionHeadrReusableView
+            let labelSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0), heightDimension: .absolute(44))
+            let label = NSCollectionLayoutBoundarySupplementaryItem(layoutSize: labelSize, elementKind: UICollectionView.elementKindSectionHeader, alignment: .bottom)
+
+
+            //section.boundarySupplementaryItems = [label]
+            
+            //configure the PagingSectionFooterView
+            let pageFooterSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0), heightDimension: .absolute(40))
             let pageFooter = NSCollectionLayoutBoundarySupplementaryItem(layoutSize: pageFooterSize, elementKind: UICollectionView.elementKindSectionFooter, alignment: .bottom)
+            
+            section.boundarySupplementaryItems = [pageFooter]
+            
             section.visibleItemsInvalidationHandler = { [weak self] (items, offset, env) -> Void in
                 guard let self = self else { return }
 
@@ -90,8 +103,6 @@ extension PlaylistViewController {
 
                 self.pagingInfoSubject.send(PagingInfo(sectionIndex: sectionIndex, currentPage: Int(page)))
             }
-            section.boundarySupplementaryItems = [pageFooter]
-            
             return section
         }
         return layout
@@ -109,40 +120,69 @@ extension PlaylistViewController {
 
                 return cell
             } else if indexPath.section == 1 {
-                let cell = collectionView.dequeueReusableCell(withReuseIdentifier: HeaderViewCell.headerViewIdentifier, for: indexPath) as? HeaderViewCell
+                let cell = collectionView.dequeueReusableCell(withReuseIdentifier: LabelCell.lableIdentifier, for: indexPath) as? LabelCell
                 cell?.backgroundColor = .systemYellow
+                cell?.textLabel.text = "Cell \(itemIdentifier)"
                 return cell
             } else {
-                let cell = collectionView.dequeueReusableCell(withReuseIdentifier: HeaderViewCell.headerViewIdentifier, for: indexPath) as? HeaderViewCell
-                cell?.backgroundColor = .systemYellow
+                let cell = collectionView.dequeueReusableCell(withReuseIdentifier: LabelCell.lableIdentifier, for: indexPath) as? LabelCell
+                cell?.textLabel.text = "Cell \(itemIdentifier)"
+                cell?.backgroundColor = .systemOrange
                 return cell
             }
         })
         
+        
+        
+        dataSource.supplementaryViewProvider = { (collectionView, kind, indexPath) -> UICollectionReusableView? in
+            guard let labelCell = collectionView.dequeueReusableSupplementaryView(ofKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: LabelSectionHeadrReusableView.labelSectionIdentifier, for: indexPath) as? LabelSectionHeadrReusableView else {
+                fatalError("")
+            }
+            if indexPath.section == 0 {
+                labelCell.textLabel.text = "Playlists"
+
+            } else if indexPath.section == 1 {
+            labelCell.textLabel.text = "Section 2"
+
+            } else if indexPath.section == 2 {
+                labelCell.textLabel.text = "Section 3"
+
+            }
+            return labelCell
+        }
+        
         //configure Supplementary View
         dataSource.supplementaryViewProvider = { (collectionView, kind, indexPath) -> UICollectionReusableView? in
-        
+            
             if indexPath.section == 0 {
-               guard let pagingFooter = collectionView.dequeueReusableSupplementaryView(ofKind: UICollectionView.elementKindSectionFooter, withReuseIdentifier: PagingSectionFooterView.pagingIdentifier, for: indexPath) as? PagingSectionFooterView else {
-                   fatalError("Could not dequeue a HeaderView")
-               }
+                guard let pagingFooter = collectionView.dequeueReusableSupplementaryView(ofKind: UICollectionView.elementKindSectionFooter, withReuseIdentifier: PagingSectionFooterView.pagingIdentifier, for: indexPath) as? PagingSectionFooterView else {
+                    fatalError("Could not dequeue a HeaderView")
+                }
+
                 // здесь я что то намудрил
-                let itemCount = self.dataSource.snapshot().numberOfItems(inSection: SectionKind(rawValue: indexPath.section) ?? SectionKind.first)
+                let itemCount = self.dataSource.snapshot().numberOfItems(inSection: SectionItem(rawValue: indexPath.section) ?? SectionItem.first)
                 pagingFooter.configure(with: itemCount)
                 pagingFooter.subscribeTo(subject: self.pagingInfoSubject, for: indexPath.section)
-                
+
                 return pagingFooter
-               
+            } else if indexPath.section == 1{
+                guard let pagingFooter = collectionView.dequeueReusableSupplementaryView(ofKind: UICollectionView.elementKindSectionFooter, withReuseIdentifier: PagingSectionFooterView.pagingIdentifier, for: indexPath) as? PagingSectionFooterView else {
+                    fatalError("Could not dequeue a HeaderView")
+                }
+                return pagingFooter
             } else {
-                return nil
+                guard let pagingFooter = collectionView.dequeueReusableSupplementaryView(ofKind: UICollectionView.elementKindSectionFooter, withReuseIdentifier: PagingSectionFooterView.pagingIdentifier, for: indexPath) as? PagingSectionFooterView else {
+                    fatalError("Could not dequeue a HeaderView")
+                }
+                return pagingFooter
             }
         }
         
-        var snapShot = NSDiffableDataSourceSnapshot<SectionKind, Int>()
-        snapShot.appendSections([.first])
+        var snapShot = NSDiffableDataSourceSnapshot<SectionItem, Int>()
+        snapShot.appendSections([.first, .second, .third])
         snapShot.appendItems(Array(1...4), toSection: .first)
-        //snapShot.appendItems(Array(6...15), toSection: .second)
-        //snapShot.appendItems(Array(16...25), toSection: .third)
+        snapShot.appendItems(Array(5...15), toSection: .second)
+        snapShot.appendItems(Array(16...25), toSection: .third)
         dataSource.apply(snapShot, animatingDifferences: true)
         
     }
