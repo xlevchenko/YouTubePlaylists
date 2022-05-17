@@ -10,6 +10,7 @@ import UIKit
 class LabelCell: UICollectionViewCell {
     
     static let lableIdentifier = "labelCell"
+    static let labelID = "label"
     
     public lazy var textLabel: UILabel = {
         let label = UILabel()
@@ -30,6 +31,10 @@ class LabelCell: UICollectionViewCell {
     //helper initializer method
     private func commonInit() {
         textLabelConstraints()
+    }
+    
+    func configure(with second: LabelModel) {
+        textLabel.text = second.name
     }
     
     private func textLabelConstraints() {

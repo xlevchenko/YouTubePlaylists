@@ -54,6 +54,16 @@ class HeaderViewCell: UICollectionViewCell {
         fatalError("init(coder:) has not been implemented")
     }
     
+    func configure(with first: HeaderSectionModel) {
+        imageView.image = first.image
+        //playButton.
+        channelNameLable.text = first.channelNameLable
+        countFollowersLable.text = first.countFollowersLable
+        
+    }
+    
+    
+    
     private func imageViewConstraints() {
         addSubview(imageView)
         imageView.translatesAutoresizingMaskIntoConstraints = false
