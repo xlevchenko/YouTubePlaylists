@@ -7,12 +7,17 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		601018F2283177F400DF7BA9 /* SectionItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 601018F1283177F400DF7BA9 /* SectionItem.swift */; };
 		601018F42831940900DF7BA9 /* HeaderViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 601018F32831940900DF7BA9 /* HeaderViewCell.swift */; };
-		601018FA28323E5200DF7BA9 /* PagingSectionFooterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 601018F928323E5100DF7BA9 /* PagingSectionFooterView.swift */; };
+		601018FA28323E5200DF7BA9 /* PagingFooterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 601018F928323E5100DF7BA9 /* PagingFooterView.swift */; };
 		601018FD2832432900DF7BA9 /* PagingInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 601018FC2832432900DF7BA9 /* PagingInfo.swift */; };
 		601018FF283272C200DF7BA9 /* LabelCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 601018FE283272C200DF7BA9 /* LabelCell.swift */; };
-		601019012832766300DF7BA9 /* LabelSectionHeadrReusableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 601019002832766300DF7BA9 /* LabelSectionHeadrReusableView.swift */; };
+		601019012832766300DF7BA9 /* LabelHeadrView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 601019002832766300DF7BA9 /* LabelHeadrView.swift */; };
+		601019032832CF5100DF7BA9 /* NSCollectionLayoutItem+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 601019022832CF5100DF7BA9 /* NSCollectionLayoutItem+Extension.swift */; };
+		601019082832D1CF00DF7BA9 /* NSDirectionalEdgeInsets+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 601019072832D1CF00DF7BA9 /* NSDirectionalEdgeInsets+Extension.swift */; };
+		6010190A2833C51B00DF7BA9 /* HeaderSectionModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 601019092833C51B00DF7BA9 /* HeaderSectionModel.swift */; };
+		6010190C2833CAFA00DF7BA9 /* LabelModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6010190B2833CAFA00DF7BA9 /* LabelModel.swift */; };
+		6010190E2833E47F00DF7BA9 /* SimpleFooterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6010190D2833E47F00DF7BA9 /* SimpleFooterView.swift */; };
+		601019102833E5F800DF7BA9 /* UICollectionReusableView+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6010190F2833E5F800DF7BA9 /* UICollectionReusableView+Extension.swift */; };
 		605399D328316885007444C9 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 605399D228316885007444C9 /* AppDelegate.swift */; };
 		605399D528316885007444C9 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 605399D428316885007444C9 /* SceneDelegate.swift */; };
 		605399D728316885007444C9 /* PlaylistViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 605399D628316885007444C9 /* PlaylistViewController.swift */; };
@@ -21,12 +26,17 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		601018F1283177F400DF7BA9 /* SectionItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SectionItem.swift; sourceTree = "<group>"; };
 		601018F32831940900DF7BA9 /* HeaderViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeaderViewCell.swift; sourceTree = "<group>"; };
-		601018F928323E5100DF7BA9 /* PagingSectionFooterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PagingSectionFooterView.swift; sourceTree = "<group>"; };
+		601018F928323E5100DF7BA9 /* PagingFooterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PagingFooterView.swift; sourceTree = "<group>"; };
 		601018FC2832432900DF7BA9 /* PagingInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PagingInfo.swift; sourceTree = "<group>"; };
 		601018FE283272C200DF7BA9 /* LabelCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LabelCell.swift; sourceTree = "<group>"; };
-		601019002832766300DF7BA9 /* LabelSectionHeadrReusableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LabelSectionHeadrReusableView.swift; sourceTree = "<group>"; };
+		601019002832766300DF7BA9 /* LabelHeadrView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LabelHeadrView.swift; sourceTree = "<group>"; };
+		601019022832CF5100DF7BA9 /* NSCollectionLayoutItem+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSCollectionLayoutItem+Extension.swift"; sourceTree = "<group>"; };
+		601019072832D1CF00DF7BA9 /* NSDirectionalEdgeInsets+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSDirectionalEdgeInsets+Extension.swift"; sourceTree = "<group>"; };
+		601019092833C51B00DF7BA9 /* HeaderSectionModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeaderSectionModel.swift; sourceTree = "<group>"; };
+		6010190B2833CAFA00DF7BA9 /* LabelModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LabelModel.swift; sourceTree = "<group>"; };
+		6010190D2833E47F00DF7BA9 /* SimpleFooterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SimpleFooterView.swift; sourceTree = "<group>"; };
+		6010190F2833E5F800DF7BA9 /* UICollectionReusableView+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UICollectionReusableView+Extension.swift"; sourceTree = "<group>"; };
 		605399CF28316885007444C9 /* YouTubePlaylists.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = YouTubePlaylists.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		605399D228316885007444C9 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		605399D428316885007444C9 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -51,8 +61,40 @@
 			isa = PBXGroup;
 			children = (
 				601018FC2832432900DF7BA9 /* PagingInfo.swift */,
+				601019092833C51B00DF7BA9 /* HeaderSectionModel.swift */,
+				6010190B2833CAFA00DF7BA9 /* LabelModel.swift */,
 			);
 			path = Model;
+			sourceTree = "<group>";
+		};
+		601019042832CF6E00DF7BA9 /* Extension */ = {
+			isa = PBXGroup;
+			children = (
+				601019022832CF5100DF7BA9 /* NSCollectionLayoutItem+Extension.swift */,
+				601019072832D1CF00DF7BA9 /* NSDirectionalEdgeInsets+Extension.swift */,
+				6010190F2833E5F800DF7BA9 /* UICollectionReusableView+Extension.swift */,
+			);
+			path = Extension;
+			sourceTree = "<group>";
+		};
+		601019052832CFA700DF7BA9 /* ViewControllers */ = {
+			isa = PBXGroup;
+			children = (
+				605399D628316885007444C9 /* PlaylistViewController.swift */,
+			);
+			path = ViewControllers;
+			sourceTree = "<group>";
+		};
+		601019062832D01900DF7BA9 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				601019002832766300DF7BA9 /* LabelHeadrView.swift */,
+				601018F928323E5100DF7BA9 /* PagingFooterView.swift */,
+				601018F32831940900DF7BA9 /* HeaderViewCell.swift */,
+				601018FE283272C200DF7BA9 /* LabelCell.swift */,
+				6010190D2833E47F00DF7BA9 /* SimpleFooterView.swift */,
+			);
+			path = Views;
 			sourceTree = "<group>";
 		};
 		605399C628316885007444C9 = {
@@ -74,15 +116,12 @@
 		605399D128316885007444C9 /* YouTubePlaylists */ = {
 			isa = PBXGroup;
 			children = (
-				601018FB2832431100DF7BA9 /* Model */,
 				605399D228316885007444C9 /* AppDelegate.swift */,
 				605399D428316885007444C9 /* SceneDelegate.swift */,
-				601018F1283177F400DF7BA9 /* SectionItem.swift */,
-				605399D628316885007444C9 /* PlaylistViewController.swift */,
-				601018F928323E5100DF7BA9 /* PagingSectionFooterView.swift */,
-				601018F32831940900DF7BA9 /* HeaderViewCell.swift */,
-				601019002832766300DF7BA9 /* LabelSectionHeadrReusableView.swift */,
-				601018FE283272C200DF7BA9 /* LabelCell.swift */,
+				601018FB2832431100DF7BA9 /* Model */,
+				601019052832CFA700DF7BA9 /* ViewControllers */,
+				601019062832D01900DF7BA9 /* Views */,
+				601019042832CF6E00DF7BA9 /* Extension */,
 				605399DB28316886007444C9 /* Assets.xcassets */,
 				605399DD28316886007444C9 /* LaunchScreen.storyboard */,
 				605399E028316886007444C9 /* Info.plist */,
@@ -165,10 +204,15 @@
 				601018FF283272C200DF7BA9 /* LabelCell.swift in Sources */,
 				605399D328316885007444C9 /* AppDelegate.swift in Sources */,
 				605399D528316885007444C9 /* SceneDelegate.swift in Sources */,
-				601019012832766300DF7BA9 /* LabelSectionHeadrReusableView.swift in Sources */,
-				601018F2283177F400DF7BA9 /* SectionItem.swift in Sources */,
+				601019102833E5F800DF7BA9 /* UICollectionReusableView+Extension.swift in Sources */,
+				601019032832CF5100DF7BA9 /* NSCollectionLayoutItem+Extension.swift in Sources */,
+				601019012832766300DF7BA9 /* LabelHeadrView.swift in Sources */,
+				6010190A2833C51B00DF7BA9 /* HeaderSectionModel.swift in Sources */,
+				6010190E2833E47F00DF7BA9 /* SimpleFooterView.swift in Sources */,
+				6010190C2833CAFA00DF7BA9 /* LabelModel.swift in Sources */,
+				601019082832D1CF00DF7BA9 /* NSDirectionalEdgeInsets+Extension.swift in Sources */,
 				601018F42831940900DF7BA9 /* HeaderViewCell.swift in Sources */,
-				601018FA28323E5200DF7BA9 /* PagingSectionFooterView.swift in Sources */,
+				601018FA28323E5200DF7BA9 /* PagingFooterView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -8,10 +8,8 @@
 import UIKit
 import Combine
 
-class PagingSectionFooterView: UICollectionReusableView {
-    
-    static let pagingIdentifier = "pagingSectionFooterView"
-    
+class PagingFooterView: UICollectionReusableView {
+        
     private lazy var pageControl: UIPageControl = {
         let control = UIPageControl()
         control.translatesAutoresizingMaskIntoConstraints = false
