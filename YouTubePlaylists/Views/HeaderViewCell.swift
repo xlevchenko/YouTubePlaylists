@@ -8,9 +8,7 @@
 import UIKit
 
 class HeaderViewCell: UICollectionViewCell {
-    
-    static let headerViewIdentifier = "headerImageViewCell"
-    
+        
     let imageView: UIImageView = {
         let imageView = UIImageView()
         imageView.image = UIImage(named: "image")

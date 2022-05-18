@@ -19,6 +19,7 @@ class PagingFooterView: UICollectionReusableView {
         return control
     }()
     
+   
     private var pagingInfoToken: AnyCancellable?
     
     override init(frame: CGRect) {

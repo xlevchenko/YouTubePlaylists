@@ -21,10 +21,11 @@ class PlaylistViewController: UIViewController {
     
     enum SectionItem: Hashable {
         case first(HeaderSectionModel)
-        case second(LabelModel)
+        case second(MediumSectionModel)
         case third(LabelModel)
     }
     
+        
     override func viewDidLoad() {
         super.viewDidLoad()
         configureNavigationBar()
@@ -54,7 +55,8 @@ extension PlaylistViewController {
         collectionView = UICollectionView(frame: view.bounds, collectionViewLayout: createLayout())
         
         //register cell and reusable view
-        collectionView.register(HeaderViewCell.self, forCellWithReuseIdentifier: HeaderViewCell.headerViewIdentifier)
+        collectionView.register(HeaderViewCell.self, forCellWithReuseIdentifier: HeaderViewCell.reuseIdentifier)
+        collectionView.register(MediumViewCell.self, forCellWithReuseIdentifier: MediumViewCell.reuseIdentifier)
         collectionView.register(LabelCell.self, forCellWithReuseIdentifier: LabelCell.lableIdentifier)
         
         collectionView.register(LabelHeadrView.self, forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: LabelHeadrView.reuseIdentifier)
@@ -75,11 +77,11 @@ extension PlaylistViewController {
         let item = NSCollectionLayoutItem.withEntireSize()
         item.contentInsets = NSDirectionalEdgeInsets.uniform(size: 5)
         
-        let groupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0), heightDimension: .absolute(230))
+        let groupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0), heightDimension: .fractionalWidth(0.6))
         let group = NSCollectionLayoutGroup.horizontal(layoutSize: groupSize, subitems: [item])
         
         let section = NSCollectionLayoutSection(group: group)
-        section.orthogonalScrollingBehavior = .groupPagingCentered
+        section.orthogonalScrollingBehavior = .groupPaging
         
         let footerSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0), heightDimension: .absolute(20))
         let pagingFooterElement = NSCollectionLayoutBoundarySupplementaryItem(layoutSize: footerSize, elementKind: UICollectionView.elementKindSectionFooter, alignment: .bottom)
@@ -101,12 +103,13 @@ extension PlaylistViewController {
         let item = NSCollectionLayoutItem(layoutSize: itemSize)
         item.contentInsets = NSDirectionalEdgeInsets.uniform(size: 5)
         
-        let groupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(0.5), heightDimension: .fractionalWidth(0.3))
+        let groupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(0.47), heightDimension: .absolute(90))
         let group = NSCollectionLayoutGroup.horizontal(layoutSize: groupSize, subitems: [item])
         
         let section = NSCollectionLayoutSection(group: group)
-        section.orthogonalScrollingBehavior = .groupPaging
-        
+        section.contentInsets = NSDirectionalEdgeInsets(top: 0, leading: 0, bottom: 20, trailing: 0)
+        section.orthogonalScrollingBehavior = .continuous
+
         if addHeader {
             addStandardHeader(toSection: section)
         }
@@ -121,7 +124,7 @@ extension PlaylistViewController {
         let item = NSCollectionLayoutItem(layoutSize: itemSize)
         item.contentInsets = NSDirectionalEdgeInsets.uniform(size: 5)
         
-        let groupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(0.5), heightDimension: .fractionalWidth(0.4))
+        let groupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(0.4), heightDimension: .fractionalWidth(0.4))
         let group = NSCollectionLayoutGroup.horizontal(layoutSize: groupSize, subitems: [item])
         
         let section = NSCollectionLayoutSection(group: group)
@@ -150,6 +153,7 @@ extension PlaylistViewController {
             if sectionIndex == 0 {
                 return self.topSection(sectionIndex)
             } else if sectionIndex == 1 {
+                
                 return self.mediumSection(addHeader: true)
             } else {
                 let snapshot = self.dataSource.snapshot()
@@ -214,7 +218,7 @@ extension PlaylistViewController {
         snapshot.appendSections(sections)
         
         snapshot.appendItems(HeaderSectionModel.available.map(SectionItem.first), toSection: sections[0])
-        snapshot.appendItems(LabelModel.available.map(SectionItem.second), toSection: sections[1])
+        snapshot.appendItems(MediumSectionModel.available.map(SectionItem.second), toSection: sections[1])
         snapshot.appendItems(LabelModel.available.map(SectionItem.third), toSection: sections[2])
         
         dataSource.apply(snapshot, animatingDifferences: animated)
@@ -224,14 +228,13 @@ extension PlaylistViewController {
     private func cell(collectionView: UICollectionView, indexPath: IndexPath, item: SectionItem) -> UICollectionViewCell {
         switch item {
         case .first(let first):
-            let cell: HeaderViewCell = collectionView.dequeueReusableCell(withReuseIdentifier: HeaderViewCell.headerViewIdentifier, for: indexPath) as! HeaderViewCell
+            let cell: HeaderViewCell = collectionView.dequeueReusableCell(withReuseIdentifier: HeaderViewCell.reuseIdentifier, for: indexPath) as! HeaderViewCell
             cell.configure(with: first)
             return cell
         
         case .second(let second):
-            let cell: LabelCell = collectionView.dequeueReusableCell(withReuseIdentifier: LabelCell.lableIdentifier, for: indexPath) as! LabelCell
+            let cell: MediumViewCell = collectionView.dequeueReusableCell(withReuseIdentifier: MediumViewCell.reuseIdentifier, for: indexPath) as! MediumViewCell
             cell.configure(with: second)
-            cell.backgroundColor = .systemYellow
             return cell
         
         case .third(let third):
