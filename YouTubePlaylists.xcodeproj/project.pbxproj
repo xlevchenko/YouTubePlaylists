@@ -25,10 +25,14 @@
 		605399DF28316886007444C9 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 605399DD28316886007444C9 /* LaunchScreen.storyboard */; };
 		60D4C26F283536B700FF7013 /* MediumViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60D4C26E283536B700FF7013 /* MediumViewCell.swift */; };
 		60D4C27128353B0C00FF7013 /* MediumSectionModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60D4C27028353B0C00FF7013 /* MediumSectionModel.swift */; };
-		60D4C27328369EFC00FF7013 /* VideoPlayerCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60D4C27228369EFC00FF7013 /* VideoPlayerCardView.swift */; };
+		60D4C2752836B9BF00FF7013 /* BottomViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60D4C2742836B9BF00FF7013 /* BottomViewCell.swift */; };
+		60D4C2772836BA8D00FF7013 /* BottomSectionModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60D4C2762836BA8D00FF7013 /* BottomSectionModel.swift */; };
+		81DFCF4C03C02D4D0775F144 /* Pods_YouTubePlaylists.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2CD3D4CC3DC33B8EB486D54F /* Pods_YouTubePlaylists.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		2CD3D4CC3DC33B8EB486D54F /* Pods_YouTubePlaylists.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_YouTubePlaylists.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		53A11DD3B4ACB7CB946F92F2 /* Pods-YouTubePlaylists.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-YouTubePlaylists.debug.xcconfig"; path = "Target Support Files/Pods-YouTubePlaylists/Pods-YouTubePlaylists.debug.xcconfig"; sourceTree = "<group>"; };
 		601018F32831940900DF7BA9 /* HeaderViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeaderViewCell.swift; sourceTree = "<group>"; };
 		601018F928323E5100DF7BA9 /* PagingFooterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PagingFooterView.swift; sourceTree = "<group>"; };
 		601018FC2832432900DF7BA9 /* PagingInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PagingInfo.swift; sourceTree = "<group>"; };
@@ -49,7 +53,9 @@
 		605399E028316886007444C9 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		60D4C26E283536B700FF7013 /* MediumViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MediumViewCell.swift; sourceTree = "<group>"; };
 		60D4C27028353B0C00FF7013 /* MediumSectionModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MediumSectionModel.swift; sourceTree = "<group>"; };
-		60D4C27228369EFC00FF7013 /* VideoPlayerCardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoPlayerCardView.swift; sourceTree = "<group>"; };
+		60D4C2742836B9BF00FF7013 /* BottomViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BottomViewCell.swift; sourceTree = "<group>"; };
+		60D4C2762836BA8D00FF7013 /* BottomSectionModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BottomSectionModel.swift; sourceTree = "<group>"; };
+		F5AFC1EC4FB7DBF52018195B /* Pods-YouTubePlaylists.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-YouTubePlaylists.release.xcconfig"; path = "Target Support Files/Pods-YouTubePlaylists/Pods-YouTubePlaylists.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -57,18 +63,28 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				81DFCF4C03C02D4D0775F144 /* Pods_YouTubePlaylists.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		0EB8C2F917D8F8A2C7791F7C /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				2CD3D4CC3DC33B8EB486D54F /* Pods_YouTubePlaylists.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		601018FB2832431100DF7BA9 /* Model */ = {
 			isa = PBXGroup;
 			children = (
 				601018FC2832432900DF7BA9 /* PagingInfo.swift */,
 				601019092833C51B00DF7BA9 /* HeaderSectionModel.swift */,
 				60D4C27028353B0C00FF7013 /* MediumSectionModel.swift */,
+				60D4C2762836BA8D00FF7013 /* BottomSectionModel.swift */,
 				6010190B2833CAFA00DF7BA9 /* LabelModel.swift */,
 			);
 			path = Model;
@@ -99,9 +115,9 @@
 				601018F928323E5100DF7BA9 /* PagingFooterView.swift */,
 				601018F32831940900DF7BA9 /* HeaderViewCell.swift */,
 				60D4C26E283536B700FF7013 /* MediumViewCell.swift */,
+				60D4C2742836B9BF00FF7013 /* BottomViewCell.swift */,
 				601018FE283272C200DF7BA9 /* LabelCell.swift */,
 				6010190D2833E47F00DF7BA9 /* SimpleFooterView.swift */,
-				60D4C27228369EFC00FF7013 /* VideoPlayerCardView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -111,6 +127,8 @@
 			children = (
 				605399D128316885007444C9 /* YouTubePlaylists */,
 				605399D028316885007444C9 /* Products */,
+				A21A67C80D4E98D174EEDD2E /* Pods */,
+				0EB8C2F917D8F8A2C7791F7C /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -138,6 +156,15 @@
 			path = YouTubePlaylists;
 			sourceTree = "<group>";
 		};
+		A21A67C80D4E98D174EEDD2E /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				53A11DD3B4ACB7CB946F92F2 /* Pods-YouTubePlaylists.debug.xcconfig */,
+				F5AFC1EC4FB7DBF52018195B /* Pods-YouTubePlaylists.release.xcconfig */,
+			);
+			path = Pods;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -145,9 +172,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 605399E328316886007444C9 /* Build configuration list for PBXNativeTarget "YouTubePlaylists" */;
 			buildPhases = (
+				621E8B8766786A3DF96966C6 /* [CP] Check Pods Manifest.lock */,
 				605399CB28316885007444C9 /* Sources */,
 				605399CC28316885007444C9 /* Frameworks */,
 				605399CD28316885007444C9 /* Resources */,
+				E5E608FD9ED99E39D557FB52 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -203,6 +232,48 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		621E8B8766786A3DF96966C6 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-YouTubePlaylists-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		E5E608FD9ED99E39D557FB52 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-YouTubePlaylists/Pods-YouTubePlaylists-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-YouTubePlaylists/Pods-YouTubePlaylists-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-YouTubePlaylists/Pods-YouTubePlaylists-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		605399CB28316885007444C9 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
@@ -216,15 +287,16 @@
 				605399D528316885007444C9 /* SceneDelegate.swift in Sources */,
 				601019102833E5F800DF7BA9 /* UICollectionReusableView+Extension.swift in Sources */,
 				601019032832CF5100DF7BA9 /* NSCollectionLayoutItem+Extension.swift in Sources */,
+				60D4C2772836BA8D00FF7013 /* BottomSectionModel.swift in Sources */,
 				601019012832766300DF7BA9 /* LabelHeadrView.swift in Sources */,
 				6010190A2833C51B00DF7BA9 /* HeaderSectionModel.swift in Sources */,
 				60D4C27128353B0C00FF7013 /* MediumSectionModel.swift in Sources */,
 				6010190E2833E47F00DF7BA9 /* SimpleFooterView.swift in Sources */,
-				60D4C27328369EFC00FF7013 /* VideoPlayerCardView.swift in Sources */,
 				6010190C2833CAFA00DF7BA9 /* LabelModel.swift in Sources */,
 				601019082832D1CF00DF7BA9 /* NSDirectionalEdgeInsets+Extension.swift in Sources */,
 				601018F42831940900DF7BA9 /* HeaderViewCell.swift in Sources */,
 				601018FA28323E5200DF7BA9 /* PagingFooterView.swift in Sources */,
+				60D4C2752836B9BF00FF7013 /* BottomViewCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -358,6 +430,7 @@
 		};
 		605399E428316886007444C9 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 53A11DD3B4ACB7CB946F92F2 /* Pods-YouTubePlaylists.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -385,6 +458,7 @@
 		};
 		605399E528316886007444C9 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = F5AFC1EC4FB7DBF52018195B /* Pods-YouTubePlaylists.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;

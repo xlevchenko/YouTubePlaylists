@@ -22,10 +22,10 @@ class PlaylistViewController: UIViewController {
     enum SectionItem: Hashable {
         case first(HeaderSectionModel)
         case second(MediumSectionModel)
-        case third(LabelModel)
+        case third(BottomSectionModel)
     }
     
-        
+
     override func viewDidLoad() {
         super.viewDidLoad()
         configureNavigationBar()
@@ -45,6 +45,8 @@ extension PlaylistViewController {
         let appearance = UINavigationBarAppearance()
         appearance.largeTitleTextAttributes = [.foregroundColor: UIColor.white]
         navigationItem.standardAppearance = appearance
+        
+        
     }
 }
 
@@ -57,7 +59,7 @@ extension PlaylistViewController {
         //register cell and reusable view
         collectionView.register(HeaderViewCell.self, forCellWithReuseIdentifier: HeaderViewCell.reuseIdentifier)
         collectionView.register(MediumViewCell.self, forCellWithReuseIdentifier: MediumViewCell.reuseIdentifier)
-        collectionView.register(LabelCell.self, forCellWithReuseIdentifier: LabelCell.lableIdentifier)
+        collectionView.register(BottomViewCell.self, forCellWithReuseIdentifier: BottomViewCell.reuseIdentifier)
         
         collectionView.register(LabelHeadrView.self, forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: LabelHeadrView.reuseIdentifier)
         collectionView.register(PagingFooterView.self, forSupplementaryViewOfKind: UICollectionView.elementKindSectionFooter, withReuseIdentifier: PagingFooterView.reuseIdentifier)
@@ -66,7 +68,7 @@ extension PlaylistViewController {
         collectionView.delegate = self
         collectionView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
         collectionView.backgroundColor = #colorLiteral(red: 0.1098, green: 0.1059, blue: 0.149, alpha: 1)
-        collectionView.alwaysBounceVertical = false
+       // collectionView.alwaysBounceVertical = false
         view.addSubview(collectionView)
     }
 }
@@ -119,7 +121,7 @@ extension PlaylistViewController {
     }
     
     
-    private func buttomSection(itemCont: Int, addFooter: Bool = false) -> NSCollectionLayoutSection {
+    private func buttomSection(addFooter: Bool = false) -> NSCollectionLayoutSection {
         //create item
         let itemSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0), heightDimension: .fractionalHeight(1.0))
         let item = NSCollectionLayoutItem(layoutSize: itemSize)
@@ -154,13 +156,9 @@ extension PlaylistViewController {
             if sectionIndex == 0 {
                 return self.topSection(sectionIndex)
             } else if sectionIndex == 1 {
-                
                 return self.mediumSection(addHeader: true)
             } else {
-                let snapshot = self.dataSource.snapshot()
-                let itemCount = snapshot.numberOfItems(inSection: sectionIndex)
-                let addFooter = snapshot.numberOfSections == sectionIndex + 1
-                return self.buttomSection(itemCont: itemCount, addFooter: addFooter)
+                return self.buttomSection(addFooter: false)
             }
         }
         let config = UICollectionViewCompositionalLayoutConfiguration()
@@ -220,7 +218,7 @@ extension PlaylistViewController {
         
         snapshot.appendItems(HeaderSectionModel.available.map(SectionItem.first), toSection: sections[0])
         snapshot.appendItems(MediumSectionModel.available.map(SectionItem.second), toSection: sections[1])
-        snapshot.appendItems(LabelModel.available.map(SectionItem.third), toSection: sections[2])
+        snapshot.appendItems(BottomSectionModel.available.map(SectionItem.third), toSection: sections[2])
         
         dataSource.apply(snapshot, animatingDifferences: animated)
     }
@@ -239,9 +237,8 @@ extension PlaylistViewController {
             return cell
         
         case .third(let third):
-            let cell: LabelCell = collectionView.dequeueReusableCell(withReuseIdentifier: LabelCell.lableIdentifier, for: indexPath) as! LabelCell
+            let cell: BottomViewCell = collectionView.dequeueReusableCell(withReuseIdentifier: BottomViewCell.reuseIdentifier, for: indexPath) as! BottomViewCell
             cell.configure(with: third)
-            cell.backgroundColor = .systemOrange
             return cell
         }
     }
