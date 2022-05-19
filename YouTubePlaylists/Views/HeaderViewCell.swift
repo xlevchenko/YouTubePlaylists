@@ -87,13 +87,14 @@ class HeaderViewCell: UICollectionViewCell {
             playButton.heightAnchor.constraint(equalToConstant: 60),
             playButton.widthAnchor.constraint(equalToConstant: 60),
             
-            channelNameLable.topAnchor.constraint(equalTo: playButton.bottomAnchor, constant: 85),
+            channelNameLable.topAnchor.constraint(equalTo: playButton.bottomAnchor),
             channelNameLable.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 15),
             channelNameLable.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -15),
             
-            countFollowersLable.topAnchor.constraint(equalTo: channelNameLable.bottomAnchor),
+            countFollowersLable.topAnchor.constraint(equalTo: channelNameLable.bottomAnchor, constant: -50),
             countFollowersLable.leadingAnchor.constraint(equalTo: imageView.leadingAnchor, constant: 15),
-            countFollowersLable.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -15)
+            countFollowersLable.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -15),
+            countFollowersLable.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -10)
         ])
     }
 }

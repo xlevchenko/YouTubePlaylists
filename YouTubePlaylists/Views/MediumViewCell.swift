@@ -74,7 +74,7 @@ class MediumViewCell: UICollectionViewCell {
             channelNameLable.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 15),
             channelNameLable.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -15),
             
-            countViewsLable.topAnchor.constraint(equalTo: channelNameLable.bottomAnchor),
+            countViewsLable.topAnchor.constraint(equalTo: channelNameLable.bottomAnchor, constant: 4),
             countViewsLable.leadingAnchor.constraint(equalTo: imageView.leadingAnchor, constant: 15),
             countViewsLable.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -15)
         ])

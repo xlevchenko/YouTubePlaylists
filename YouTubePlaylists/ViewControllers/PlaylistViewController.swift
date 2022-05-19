@@ -66,6 +66,7 @@ extension PlaylistViewController {
         collectionView.delegate = self
         collectionView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
         collectionView.backgroundColor = #colorLiteral(red: 0.1098, green: 0.1059, blue: 0.149, alpha: 1)
+        collectionView.alwaysBounceVertical = false
         view.addSubview(collectionView)
     }
 }
@@ -77,7 +78,7 @@ extension PlaylistViewController {
         let item = NSCollectionLayoutItem.withEntireSize()
         item.contentInsets = NSDirectionalEdgeInsets.uniform(size: 5)
         
-        let groupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0), heightDimension: .fractionalWidth(0.6))
+        let groupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0), heightDimension: .estimated(200))
         let group = NSCollectionLayoutGroup.horizontal(layoutSize: groupSize, subitems: [item])
         
         let section = NSCollectionLayoutSection(group: group)
