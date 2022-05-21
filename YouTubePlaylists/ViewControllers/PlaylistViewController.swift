@@ -7,6 +7,7 @@
 
 import UIKit
 import Combine
+import DrawerView
 
 class PlaylistViewController: UIViewController {
     
@@ -25,6 +26,10 @@ class PlaylistViewController: UIViewController {
         case third(BottomSectionModel)
     }
     
+    private var timer: Timer!
+    private var currentPage = 0
+    private var page = HeaderSectionModel.available.count
+    
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -32,6 +37,14 @@ class PlaylistViewController: UIViewController {
         configureCollectionView()
         configureDataSource()
         generateData(animated: false)
+        
+       timer = Timer.scheduledTimer(timeInterval: 5.0, target: self, selector: #selector(changeImage), userInfo: nil, repeats: true)
+
+//        let drawerView = DrawerView()
+//            drawerView.attachTo(view: self.view)
+//        drawerView.collapsedHeight = 14
+//            // Set up the drawer here
+//        drawerView.snapPositions = [.collapsed, .open]
     }
 }
 
@@ -60,6 +73,7 @@ extension PlaylistViewController {
         collectionView.register(HeaderViewCell.self, forCellWithReuseIdentifier: HeaderViewCell.reuseIdentifier)
         collectionView.register(MediumViewCell.self, forCellWithReuseIdentifier: MediumViewCell.reuseIdentifier)
         collectionView.register(BottomViewCell.self, forCellWithReuseIdentifier: BottomViewCell.reuseIdentifier)
+        collectionView.register(PlayerViewCell.self, forCellWithReuseIdentifier: PlayerViewCell.reuseIdentifier)
         
         collectionView.register(LabelHeadrView.self, forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: LabelHeadrView.reuseIdentifier)
         collectionView.register(PagingFooterView.self, forSupplementaryViewOfKind: UICollectionView.elementKindSectionFooter, withReuseIdentifier: PagingFooterView.reuseIdentifier)
@@ -78,7 +92,7 @@ extension PlaylistViewController {
 extension PlaylistViewController {
     private func topSection(_ sectionIndex: Int) -> NSCollectionLayoutSection {
         let item = NSCollectionLayoutItem.withEntireSize()
-        item.contentInsets = NSDirectionalEdgeInsets.uniform(size: 5)
+        item.contentInsets = NSDirectionalEdgeInsets(top: 0, leading: 15, bottom: 0, trailing: 15)
         
         let groupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0), heightDimension: .estimated(200))
         let group = NSCollectionLayoutGroup.horizontal(layoutSize: groupSize, subitems: [item])
@@ -88,6 +102,7 @@ extension PlaylistViewController {
         
         let footerSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0), heightDimension: .absolute(20))
         let pagingFooterElement = NSCollectionLayoutBoundarySupplementaryItem(layoutSize: footerSize, elementKind: UICollectionView.elementKindSectionFooter, alignment: .bottom)
+        pagingFooterElement.contentInsets = NSDirectionalEdgeInsets.init(top: 15, leading: 0, bottom: 0, trailing: 0)
         section.boundarySupplementaryItems += [pagingFooterElement]
         
         section.visibleItemsInvalidationHandler = { [weak self] (items, offset, env) -> Void in
@@ -110,8 +125,8 @@ extension PlaylistViewController {
         let group = NSCollectionLayoutGroup.horizontal(layoutSize: groupSize, subitems: [item])
         
         let section = NSCollectionLayoutSection(group: group)
-        section.contentInsets = NSDirectionalEdgeInsets(top: 0, leading: 0, bottom: 20, trailing: 0)
         section.orthogonalScrollingBehavior = .continuous
+        section.contentInsets = NSDirectionalEdgeInsets(top: 0, leading: 0, bottom: 30, trailing: 0)
 
         if addHeader {
             addStandardHeader(toSection: section)
@@ -132,7 +147,7 @@ extension PlaylistViewController {
         
         let section = NSCollectionLayoutSection(group: group)
         section.orthogonalScrollingBehavior = .continuousGroupLeadingBoundary
-        
+
         addStandardHeader(toSection: section)
         
         if addFooter {
@@ -165,6 +180,7 @@ extension PlaylistViewController {
         config.interSectionSpacing = 20
         layout.configuration = config
         
+        
         return layout
     }
 }
@@ -176,7 +192,7 @@ extension PlaylistViewController {
         dataSource = DataSource(collectionView: collectionView, cellProvider: { collectionView, indexPath, itemIdentifier in
             return self.cell(collectionView: collectionView, indexPath: indexPath, item: itemIdentifier)
         })
-        
+
         dataSource.supplementaryViewProvider = { [unowned self] collectionView, kind, indexPath in
             if kind == UICollectionView.elementKindSectionFooter {
                 if indexPath.section == 0 {
@@ -215,11 +231,14 @@ extension PlaylistViewController {
         }
         
         snapshot.appendSections(sections)
+        //if snapshot.appendItems()(sections[0]) {
+            //startScroll()
         
+        
+    //}
         snapshot.appendItems(HeaderSectionModel.available.map(SectionItem.first), toSection: sections[0])
         snapshot.appendItems(MediumSectionModel.available.map(SectionItem.second), toSection: sections[1])
         snapshot.appendItems(BottomSectionModel.available.map(SectionItem.third), toSection: sections[2])
-        
         dataSource.apply(snapshot, animatingDifferences: animated)
     }
     
@@ -245,7 +264,28 @@ extension PlaylistViewController {
 }
 
 
+
 // MARK: UICollectionViewDelegate
 extension PlaylistViewController: UICollectionViewDelegate {
     
 }
+
+
+//MARK: Configure Autoscroll Header View
+extension PlaylistViewController {
+    
+    @objc private func changeImage() {
+
+        if currentPage < HeaderSectionModel.available.count {
+            let index = IndexPath.init(item: currentPage, section: 0)
+            self.collectionView.scrollToItem(at: index, at: .centeredHorizontally, animated: true)
+            currentPage += 1
+        } else {
+            currentPage = 0
+            let index = IndexPath.init(item: currentPage, section: 0)
+            self.collectionView.scrollToItem(at: index, at: .centeredHorizontally, animated: true)
+        }
+    }
+}
+
+

@@ -19,7 +19,7 @@ extension HeaderSectionModel {
     static let available: [HeaderSectionModel] = [
         HeaderSectionModel(image: UIImage(named: "image")!, channelNameLable: "EminemMusic", countFollowersLable: "203 071 followers"),
         HeaderSectionModel(image: UIImage(named: "image")!, channelNameLable: "50 Cent", countFollowersLable: "203 071 followers"),
-        //HeaderSectionModel(image: UIImage(named: "image")!, channelNameLable: "EminemMusic", countFollowersLable: "203 071 followers"),
-        //HeaderSectionModel(image: UIImage(named: "image")!, channelNameLable: "EminemMusic", countFollowersLable: "203 071 followers")
+        HeaderSectionModel(image: UIImage(named: "image")!, channelNameLable: "Monatik", countFollowersLable: "203 071 followers"),
+        HeaderSectionModel(image: UIImage(named: "image")!, channelNameLable: "Drake", countFollowersLable: "203 071 followers")
     ]
 }

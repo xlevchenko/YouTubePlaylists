@@ -27,6 +27,7 @@
 		60D4C27128353B0C00FF7013 /* MediumSectionModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60D4C27028353B0C00FF7013 /* MediumSectionModel.swift */; };
 		60D4C2752836B9BF00FF7013 /* BottomViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60D4C2742836B9BF00FF7013 /* BottomViewCell.swift */; };
 		60D4C2772836BA8D00FF7013 /* BottomSectionModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60D4C2762836BA8D00FF7013 /* BottomSectionModel.swift */; };
+		60D4C2792836CBA900FF7013 /* PlayerViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60D4C2782836CBA900FF7013 /* PlayerViewCell.swift */; };
 		81DFCF4C03C02D4D0775F144 /* Pods_YouTubePlaylists.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2CD3D4CC3DC33B8EB486D54F /* Pods_YouTubePlaylists.framework */; };
 /* End PBXBuildFile section */
 
@@ -55,6 +56,7 @@
 		60D4C27028353B0C00FF7013 /* MediumSectionModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MediumSectionModel.swift; sourceTree = "<group>"; };
 		60D4C2742836B9BF00FF7013 /* BottomViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BottomViewCell.swift; sourceTree = "<group>"; };
 		60D4C2762836BA8D00FF7013 /* BottomSectionModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BottomSectionModel.swift; sourceTree = "<group>"; };
+		60D4C2782836CBA900FF7013 /* PlayerViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayerViewCell.swift; sourceTree = "<group>"; };
 		F5AFC1EC4FB7DBF52018195B /* Pods-YouTubePlaylists.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-YouTubePlaylists.release.xcconfig"; path = "Target Support Files/Pods-YouTubePlaylists/Pods-YouTubePlaylists.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -118,6 +120,7 @@
 				60D4C2742836B9BF00FF7013 /* BottomViewCell.swift */,
 				601018FE283272C200DF7BA9 /* LabelCell.swift */,
 				6010190D2833E47F00DF7BA9 /* SimpleFooterView.swift */,
+				60D4C2782836CBA900FF7013 /* PlayerViewCell.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -283,6 +286,7 @@
 				605399D728316885007444C9 /* PlaylistViewController.swift in Sources */,
 				601018FF283272C200DF7BA9 /* LabelCell.swift in Sources */,
 				605399D328316885007444C9 /* AppDelegate.swift in Sources */,
+				60D4C2792836CBA900FF7013 /* PlayerViewCell.swift in Sources */,
 				60D4C26F283536B700FF7013 /* MediumViewCell.swift in Sources */,
 				605399D528316885007444C9 /* SceneDelegate.swift in Sources */,
 				601019102833E5F800DF7BA9 /* UICollectionReusableView+Extension.swift in Sources */,
