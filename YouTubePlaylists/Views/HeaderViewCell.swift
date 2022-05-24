@@ -79,7 +79,6 @@ class HeaderViewCell: UICollectionViewCell {
             imageView.topAnchor.constraint(equalTo: self.topAnchor),
             imageView.leadingAnchor.constraint(equalTo: self.leadingAnchor),
             imageView.trailingAnchor.constraint(equalTo: self.trailingAnchor),
-            imageView.widthAnchor.constraint(equalTo: self.widthAnchor),
             imageView.heightAnchor.constraint(equalTo: self.heightAnchor),
             
             playButton.topAnchor.constraint(equalTo: imageView.topAnchor, constant: 15),

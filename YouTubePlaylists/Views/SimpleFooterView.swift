@@ -9,40 +9,47 @@ import UIKit
 
 class SimpleFooterView: UICollectionReusableView {
     
-    private lazy var titleLabel: UILabel = {
-        let label = UILabel()
-        label.translatesAutoresizingMaskIntoConstraints = false
-        label.font = UIFont.systemFont(ofSize: 14)
-        label.textAlignment = .center
-        label.textColor = .secondaryLabel
-        
-        return label
+    private var viewPlayer: UIView = {
+        let view = UIView()
+        view.translatesAutoresizingMaskIntoConstraints = false
+        view.backgroundColor = #colorLiteral(red: 0.9333, green: 0.2588, blue: 0.4902, alpha: 1)
+        view.layer.cornerRadius = 16
+        return view
     }()
+    
+    let openPlayer: UIButton = {
+        let button = UIButton(frame: .zero)
+        button.translatesAutoresizingMaskIntoConstraints = false
+        button.setImage(UIImage(named: "path"), for: .normal)
+        button.clipsToBounds = true
+        button.contentMode = .scaleAspectFill
+        return button
+    }()
+    
     
     override init(frame: CGRect) {
         super.init(frame: frame)
-        
         setupView()
     }
     
     required init?(coder: NSCoder) {
-        super.init(coder: coder)
-        
-        setupView()
+        fatalError("init(coder:) has not been implemented")
     }
     
-    func configure(with title: String) {
-        titleLabel.text = title
-    }
-    
+   
     private func setupView() {
-        addSubview(titleLabel)
+        addSubview(viewPlayer)
+        viewPlayer.addSubview(openPlayer)
         
         NSLayoutConstraint.activate([
-            titleLabel.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 10),
-            titleLabel.topAnchor.constraint(equalTo: topAnchor, constant: 5),
-            bottomAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: 10),
-            trailingAnchor.constraint(equalTo: titleLabel.trailingAnchor, constant: 10)
+            viewPlayer.topAnchor.constraint(equalTo: topAnchor, constant: 70),
+            viewPlayer.leadingAnchor.constraint(equalTo: leadingAnchor),
+            trailingAnchor.constraint(equalTo: viewPlayer.trailingAnchor),
+            bottomAnchor.constraint(equalTo: viewPlayer.bottomAnchor, constant: -90),
+            
+            openPlayer.topAnchor.constraint(equalTo: viewPlayer.topAnchor, constant: 5),
+            openPlayer.trailingAnchor.constraint(equalTo: viewPlayer.trailingAnchor),
+            openPlayer.leadingAnchor.constraint(equalTo: viewPlayer.leadingAnchor)
         ])
     }
 }

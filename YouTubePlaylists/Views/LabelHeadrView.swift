@@ -9,7 +9,7 @@ import UIKit
 
 class LabelHeadrView: UICollectionReusableView {
     
-    private lazy var titleLabel: UILabel = {
+     lazy var titleLabel: UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
         label.font = UIFont.boldSystemFont(ofSize: 23)
@@ -39,7 +39,7 @@ class LabelHeadrView: UICollectionReusableView {
         NSLayoutConstraint.activate([
             titleLabel.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 15),
             titleLabel.topAnchor.constraint(equalTo: topAnchor, constant: 10),
-            bottomAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: 5),
+            bottomAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: 8),
             trailingAnchor.constraint(equalTo: titleLabel.trailingAnchor, constant: 15)
         ])
     }

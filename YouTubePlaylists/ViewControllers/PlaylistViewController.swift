@@ -33,18 +33,12 @@ class PlaylistViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        configureNavigationBar()
+        //configureNavigationBar()
         configureCollectionView()
         configureDataSource()
         generateData(animated: false)
         
-       timer = Timer.scheduledTimer(timeInterval: 5.0, target: self, selector: #selector(changeImage), userInfo: nil, repeats: true)
-
-//        let drawerView = DrawerView()
-//            drawerView.attachTo(view: self.view)
-//        drawerView.collapsedHeight = 14
-//            // Set up the drawer here
-//        drawerView.snapPositions = [.collapsed, .open]
+        self.timer = Timer.scheduledTimer(timeInterval: 3.0, target: self, selector: #selector(self.changeImage), userInfo: nil, repeats: true)
     }
 }
 
@@ -53,13 +47,11 @@ class PlaylistViewController: UIViewController {
 extension PlaylistViewController {
     private func configureNavigationBar() {
         navigationItem.title = "Playlists"
-        navigationController?.navigationBar.prefersLargeTitles = true
+        navigationController?.navigationBar.prefersLargeTitles = false
         navigationItem.largeTitleDisplayMode = .always
         let appearance = UINavigationBarAppearance()
         appearance.largeTitleTextAttributes = [.foregroundColor: UIColor.white]
         navigationItem.standardAppearance = appearance
-        
-        
     }
 }
 
@@ -82,7 +74,7 @@ extension PlaylistViewController {
         collectionView.delegate = self
         collectionView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
         collectionView.backgroundColor = #colorLiteral(red: 0.1098, green: 0.1059, blue: 0.149, alpha: 1)
-       // collectionView.alwaysBounceVertical = false
+        collectionView.alwaysBounceVertical = false
         view.addSubview(collectionView)
     }
 }
@@ -94,20 +86,22 @@ extension PlaylistViewController {
         let item = NSCollectionLayoutItem.withEntireSize()
         item.contentInsets = NSDirectionalEdgeInsets(top: 0, leading: 15, bottom: 0, trailing: 15)
         
-        let groupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0), heightDimension: .estimated(200))
+        let groupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0), heightDimension: .absolute(190))
         let group = NSCollectionLayoutGroup.horizontal(layoutSize: groupSize, subitems: [item])
         
         let section = NSCollectionLayoutSection(group: group)
-        section.orthogonalScrollingBehavior = .groupPaging
+        addStandardHeader(toSection: section)
+
+        section.orthogonalScrollingBehavior = .continuousGroupLeadingBoundary
         
-        let footerSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0), heightDimension: .absolute(20))
-        let pagingFooterElement = NSCollectionLayoutBoundarySupplementaryItem(layoutSize: footerSize, elementKind: UICollectionView.elementKindSectionFooter, alignment: .bottom)
-        pagingFooterElement.contentInsets = NSDirectionalEdgeInsets.init(top: 15, leading: 0, bottom: 0, trailing: 0)
-        section.boundarySupplementaryItems += [pagingFooterElement]
-        
+            let footerSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0), heightDimension: .absolute(20))
+            let pagingFooterElement = NSCollectionLayoutBoundarySupplementaryItem(layoutSize: footerSize, elementKind: UICollectionView.elementKindSectionFooter, alignment: .bottom)
+            pagingFooterElement.contentInsets = NSDirectionalEdgeInsets.init(top: 15, leading: 0, bottom: 0, trailing: 0)
+            section.boundarySupplementaryItems += [pagingFooterElement]
+
         section.visibleItemsInvalidationHandler = { [weak self] (items, offset, env) -> Void in
             guard let self = self else { return }
-            
+
             let page = round(offset.x / self.view.bounds.width)
             
             self.pagingInfoSubject.send(PagingInfo(sectionIndex: sectionIndex, currentPage: Int(page)))
@@ -147,12 +141,13 @@ extension PlaylistViewController {
         
         let section = NSCollectionLayoutSection(group: group)
         section.orthogonalScrollingBehavior = .continuousGroupLeadingBoundary
-
         addStandardHeader(toSection: section)
         
         if addFooter {
-            let footerSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0), heightDimension: .estimated(35))
+            let footerSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0), heightDimension: .absolute(40))
             let footerElement = NSCollectionLayoutBoundarySupplementaryItem(layoutSize: footerSize, elementKind: UICollectionView.elementKindSectionFooter, alignment: .bottom)
+
+            footerElement.contentInsets = NSDirectionalEdgeInsets.init(top: 0, leading: 7, bottom: 0, trailing: 7)
             section.boundarySupplementaryItems += [footerElement]
         }
         return section
@@ -161,8 +156,8 @@ extension PlaylistViewController {
     
     private func addStandardHeader(toSection section: NSCollectionLayoutSection) {
         let headerSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0), heightDimension: .estimated(44))
-        let headerElement = NSCollectionLayoutBoundarySupplementaryItem(layoutSize: headerSize, elementKind: UICollectionView.elementKindSectionHeader, alignment: .top)
-        section.boundarySupplementaryItems = [headerElement]
+        let headerElement = NSCollectionLayoutBoundarySupplementaryItem(layoutSize: headerSize, elementKind: UICollectionView.elementKindSectionHeader, alignment: .topLeading)
+        section.boundarySupplementaryItems += [headerElement]
     }
     
     
@@ -173,13 +168,14 @@ extension PlaylistViewController {
             } else if sectionIndex == 1 {
                 return self.mediumSection(addHeader: true)
             } else {
-                return self.buttomSection(addFooter: false)
+                let snapshot = self.dataSource.snapshot()
+                let addFooter = snapshot.numberOfSections == sectionIndex + 1
+                return self.buttomSection(addFooter: addFooter)
             }
         }
         let config = UICollectionViewCompositionalLayoutConfiguration()
         config.interSectionSpacing = 20
         layout.configuration = config
-        
         
         return layout
     }
@@ -205,13 +201,16 @@ extension PlaylistViewController {
                     return pagingFooter
                 }
                 let footer = collectionView.dequeueReusableSupplementaryView(ofKind: UICollectionView.elementKindSectionFooter, withReuseIdentifier: SimpleFooterView.reuseIdentifier, for: indexPath) as! SimpleFooterView
-                footer.configure(with: "This example!")
+                
                 return footer
             }
             
             let header = collectionView.dequeueReusableSupplementaryView(ofKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: LabelHeadrView.reuseIdentifier, for: indexPath) as! LabelHeadrView
             
-            if indexPath.section == 1 {
+            if indexPath.section == 0 {
+                header.configure(with: "Playlist 1")
+                header.titleLabel.font = .boldSystemFont(ofSize: 29)
+            } else if indexPath.section == 1 {
                 header.configure(with: "Playlist 2")
             } else {
                 header.configure(with: "Playlist 3")
@@ -231,11 +230,7 @@ extension PlaylistViewController {
         }
         
         snapshot.appendSections(sections)
-        //if snapshot.appendItems()(sections[0]) {
-            //startScroll()
-        
-        
-    //}
+    
         snapshot.appendItems(HeaderSectionModel.available.map(SectionItem.first), toSection: sections[0])
         snapshot.appendItems(MediumSectionModel.available.map(SectionItem.second), toSection: sections[1])
         snapshot.appendItems(BottomSectionModel.available.map(SectionItem.third), toSection: sections[2])
@@ -278,12 +273,12 @@ extension PlaylistViewController {
 
         if currentPage < HeaderSectionModel.available.count {
             let index = IndexPath.init(item: currentPage, section: 0)
-            self.collectionView.scrollToItem(at: index, at: .centeredHorizontally, animated: true)
+            self.collectionView.scrollToItem(at: index, at: .top, animated: true)
             currentPage += 1
         } else {
             currentPage = 0
             let index = IndexPath.init(item: currentPage, section: 0)
-            self.collectionView.scrollToItem(at: index, at: .centeredHorizontally, animated: true)
+            self.collectionView.scrollToItem(at: index, at: .top, animated: true)
         }
     }
 }
