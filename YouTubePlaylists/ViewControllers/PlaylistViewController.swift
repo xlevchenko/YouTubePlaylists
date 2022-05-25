@@ -33,25 +33,11 @@ class PlaylistViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        //configureNavigationBar()
         configureCollectionView()
         configureDataSource()
         generateData(animated: false)
         
         self.timer = Timer.scheduledTimer(timeInterval: 3.0, target: self, selector: #selector(self.changeImage), userInfo: nil, repeats: true)
-    }
-}
-
-
-//MARK: Configure navigation bar
-extension PlaylistViewController {
-    private func configureNavigationBar() {
-        navigationItem.title = "Playlists"
-        navigationController?.navigationBar.prefersLargeTitles = false
-        navigationItem.largeTitleDisplayMode = .always
-        let appearance = UINavigationBarAppearance()
-        appearance.largeTitleTextAttributes = [.foregroundColor: UIColor.white]
-        navigationItem.standardAppearance = appearance
     }
 }
 
@@ -74,7 +60,7 @@ extension PlaylistViewController {
         collectionView.delegate = self
         collectionView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
         collectionView.backgroundColor = #colorLiteral(red: 0.1098, green: 0.1059, blue: 0.149, alpha: 1)
-        collectionView.alwaysBounceVertical = false
+        //collectionView.alwaysBounceVertical = false
         view.addSubview(collectionView)
     }
 }
@@ -168,9 +154,7 @@ extension PlaylistViewController {
             } else if sectionIndex == 1 {
                 return self.mediumSection(addHeader: true)
             } else {
-                let snapshot = self.dataSource.snapshot()
-                let addFooter = snapshot.numberOfSections == sectionIndex + 1
-                return self.buttomSection(addFooter: addFooter)
+                return self.buttomSection(addFooter: false)
             }
         }
         let config = UICollectionViewCompositionalLayoutConfiguration()
@@ -262,7 +246,33 @@ extension PlaylistViewController {
 
 // MARK: UICollectionViewDelegate
 extension PlaylistViewController: UICollectionViewDelegate {
-    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        guard 0...2 ~= indexPath.section else { return }
+        guard let item = dataSource.itemIdentifier(for: indexPath) else { return }
+        
+        let vc: UIViewController?
+        
+        switch item {
+        case .first(let headerSectionModel):
+            switch headerSectionModel.playlist {
+            case .one:
+                vc = PlayerViewController()
+            case .two:
+                vc = PlayerViewController()
+            case .three:
+                vc = PlayerViewController()
+            case .four:
+                vc = PlayerViewController()
+            }
+            
+        case .second(let mediumSectionModel):
+            vc = PlayerViewController()
+        case .third(let bottomSectionModel):
+           vc = PlayerViewController()
+        }
+        guard let viewController = vc else { return }
+        self.present(viewController, animated: true)
+    }
 }
 
 

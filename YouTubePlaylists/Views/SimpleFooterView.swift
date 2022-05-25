@@ -42,7 +42,7 @@ class SimpleFooterView: UICollectionReusableView {
         viewPlayer.addSubview(openPlayer)
         
         NSLayoutConstraint.activate([
-            viewPlayer.topAnchor.constraint(equalTo: topAnchor, constant: 70),
+            viewPlayer.topAnchor.constraint(equalTo: topAnchor, constant: 750),
             viewPlayer.leadingAnchor.constraint(equalTo: leadingAnchor),
             trailingAnchor.constraint(equalTo: viewPlayer.trailingAnchor),
             bottomAnchor.constraint(equalTo: viewPlayer.bottomAnchor, constant: -90),
@@ -53,3 +53,5 @@ class SimpleFooterView: UICollectionReusableView {
         ])
     }
 }
+
+
