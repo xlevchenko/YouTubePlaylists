@@ -51,7 +51,6 @@ extension PlaylistViewController {
         collectionView.register(HeaderViewCell.self, forCellWithReuseIdentifier: HeaderViewCell.reuseIdentifier)
         collectionView.register(MediumViewCell.self, forCellWithReuseIdentifier: MediumViewCell.reuseIdentifier)
         collectionView.register(BottomViewCell.self, forCellWithReuseIdentifier: BottomViewCell.reuseIdentifier)
-        collectionView.register(PlayerViewCell.self, forCellWithReuseIdentifier: PlayerViewCell.reuseIdentifier)
         
         collectionView.register(LabelHeadrView.self, forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: LabelHeadrView.reuseIdentifier)
         collectionView.register(PagingFooterView.self, forSupplementaryViewOfKind: UICollectionView.elementKindSectionFooter, withReuseIdentifier: PagingFooterView.reuseIdentifier)
@@ -60,7 +59,6 @@ extension PlaylistViewController {
         collectionView.delegate = self
         collectionView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
         collectionView.backgroundColor = #colorLiteral(red: 0.1098, green: 0.1059, blue: 0.149, alpha: 1)
-        //collectionView.alwaysBounceVertical = false
         view.addSubview(collectionView)
     }
 }

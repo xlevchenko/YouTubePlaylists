@@ -9,7 +9,7 @@ import UIKit
 
 class ContainerViewController: UIViewController {
     
-    var player = SimpleFooterView()
+    var player = SmallPlayer()
     
     let playlistConroller = PlaylistViewController()
 
@@ -19,6 +19,12 @@ class ContainerViewController: UIViewController {
         miniPlayer()
         addPlaylistCollection()
         
+        player.openPlayer.addTarget(self, action: #selector(handle(sender: )), for: .touchUpInside)
+    }
+    
+    @objc func handle(sender: UIButton!) {
+        let controller = PlayerViewController()
+        present(controller, animated: true)
     }
 }
 
@@ -39,7 +45,7 @@ extension ContainerViewController {
             playlistConroller.view.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
             playlistConroller.view.leadingAnchor.constraint(equalTo: view.leadingAnchor),
             playlistConroller.view.trailingAnchor.constraint(equalTo: view.trailingAnchor),
-            playlistConroller.view.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -70)
+            playlistConroller.view.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -80)
         ])
     }
 }
@@ -52,10 +58,10 @@ extension ContainerViewController {
         player.translatesAutoresizingMaskIntoConstraints = false
         
         NSLayoutConstraint.activate([
-            player.topAnchor.constraint(equalTo: view.topAnchor, constant: 30),
-            player.leadingAnchor.constraint(equalTo: view.leadingAnchor),
-            view.trailingAnchor.constraint(equalTo: player.trailingAnchor),
-            view.bottomAnchor.constraint(equalTo: player.bottomAnchor, constant: 50),
+            player.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 8),
+            player.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -8),
+            player.bottomAnchor.constraint(equalTo: view.bottomAnchor),
+            player.heightAnchor.constraint(equalToConstant: 60)
         ])
     }
 }

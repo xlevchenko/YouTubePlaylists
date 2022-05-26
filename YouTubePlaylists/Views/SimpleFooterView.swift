@@ -23,8 +23,15 @@ class SimpleFooterView: UICollectionReusableView {
         button.setImage(UIImage(named: "path"), for: .normal)
         button.clipsToBounds = true
         button.contentMode = .scaleAspectFill
+        button.addTarget(self, action: #selector(handle(sender:)), for: .touchUpInside)
         return button
     }()
+    
+    @objc func handle(sender: UIButton!) {
+        let controller = PlayerViewController()
+        
+        print("Tap")
+    }
     
     
     override init(frame: CGRect) {
@@ -44,8 +51,8 @@ class SimpleFooterView: UICollectionReusableView {
         NSLayoutConstraint.activate([
             viewPlayer.topAnchor.constraint(equalTo: topAnchor, constant: 750),
             viewPlayer.leadingAnchor.constraint(equalTo: leadingAnchor),
-            trailingAnchor.constraint(equalTo: viewPlayer.trailingAnchor),
-            bottomAnchor.constraint(equalTo: viewPlayer.bottomAnchor, constant: -90),
+            viewPlayer.trailingAnchor.constraint(equalTo: trailingAnchor),
+            viewPlayer.bottomAnchor.constraint(equalTo: bottomAnchor, constant: 80),
             
             openPlayer.topAnchor.constraint(equalTo: viewPlayer.topAnchor, constant: 5),
             openPlayer.trailingAnchor.constraint(equalTo: viewPlayer.trailingAnchor),
