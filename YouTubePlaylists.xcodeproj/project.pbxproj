@@ -10,7 +10,6 @@
 		601018F42831940900DF7BA9 /* HeaderViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 601018F32831940900DF7BA9 /* HeaderViewCell.swift */; };
 		601018FA28323E5200DF7BA9 /* PagingFooterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 601018F928323E5100DF7BA9 /* PagingFooterView.swift */; };
 		601018FD2832432900DF7BA9 /* PagingInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 601018FC2832432900DF7BA9 /* PagingInfo.swift */; };
-		601018FF283272C200DF7BA9 /* LabelCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 601018FE283272C200DF7BA9 /* LabelCell.swift */; };
 		601019012832766300DF7BA9 /* LabelHeadrView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 601019002832766300DF7BA9 /* LabelHeadrView.swift */; };
 		601019032832CF5100DF7BA9 /* NSCollectionLayoutItem+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 601019022832CF5100DF7BA9 /* NSCollectionLayoutItem+Extension.swift */; };
 		601019082832D1CF00DF7BA9 /* NSDirectionalEdgeInsets+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 601019072832D1CF00DF7BA9 /* NSDirectionalEdgeInsets+Extension.swift */; };
@@ -40,7 +39,6 @@
 		601018F32831940900DF7BA9 /* HeaderViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeaderViewCell.swift; sourceTree = "<group>"; };
 		601018F928323E5100DF7BA9 /* PagingFooterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PagingFooterView.swift; sourceTree = "<group>"; };
 		601018FC2832432900DF7BA9 /* PagingInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PagingInfo.swift; sourceTree = "<group>"; };
-		601018FE283272C200DF7BA9 /* LabelCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LabelCell.swift; sourceTree = "<group>"; };
 		601019002832766300DF7BA9 /* LabelHeadrView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LabelHeadrView.swift; sourceTree = "<group>"; };
 		601019022832CF5100DF7BA9 /* NSCollectionLayoutItem+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSCollectionLayoutItem+Extension.swift"; sourceTree = "<group>"; };
 		601019072832D1CF00DF7BA9 /* NSDirectionalEdgeInsets+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSDirectionalEdgeInsets+Extension.swift"; sourceTree = "<group>"; };
@@ -126,7 +124,6 @@
 				601018F32831940900DF7BA9 /* HeaderViewCell.swift */,
 				60D4C26E283536B700FF7013 /* MediumViewCell.swift */,
 				60D4C2742836B9BF00FF7013 /* BottomViewCell.swift */,
-				601018FE283272C200DF7BA9 /* LabelCell.swift */,
 				6010190D2833E47F00DF7BA9 /* SimpleFooterView.swift */,
 				601F4CEA283ECA7B00BF6529 /* SmallPlayer.swift */,
 				601F4CEC283FCA9000BF6529 /* PlayerView.swift */,
@@ -295,7 +292,6 @@
 				605399D728316885007444C9 /* PlaylistViewController.swift in Sources */,
 				601F4CEB283ECA7C00BF6529 /* SmallPlayer.swift in Sources */,
 				601F4CED283FCA9000BF6529 /* PlayerView.swift in Sources */,
-				601018FF283272C200DF7BA9 /* LabelCell.swift in Sources */,
 				605399D328316885007444C9 /* AppDelegate.swift in Sources */,
 				60D4C26F283536B700FF7013 /* MediumViewCell.swift in Sources */,
 				605399D528316885007444C9 /* SceneDelegate.swift in Sources */,
