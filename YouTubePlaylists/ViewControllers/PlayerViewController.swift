@@ -14,10 +14,10 @@ class PlayerViewController: UIViewController {
     
     var playerContainerView: UIView!
     // Reference for the player view.
-    private var playerView: PlayerView!
+    private var playerView = PlayerView()
     // URL for the test video.
     private let videoURL = "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4"
-
+    
     var dismissButton: UIButton!
     
     var videoSlider: UISlider!
@@ -111,7 +111,7 @@ extension PlayerViewController {
     }
     
     private func configurePlayerView() {
-        playerView = PlayerView()
+        //playerView = PlayerView()
         
         //setup constrains
         playerContainerView.addSubview(playerView)
@@ -139,15 +139,15 @@ extension PlayerViewController {
         
         //treack player progress
         let interval = CMTime(value: 1, timescale: 2)
-        playerView.player?.addPeriodicTimeObserver(forInterval: interval, queue: .main, using: { progressTime in
+        playerView.player?.addPeriodicTimeObserver(forInterval: interval, queue: nil, using: { progressTime in
             let seconds = CMTimeGetSeconds(progressTime)
             let secondString = String(format: "%02d", Int(seconds) % 60)
             let minutesText = String(format: "%02d", Int(seconds) / 60)
             self.startVideoLengthLabel.text = "\(minutesText):\(secondString)"
             
             //lets move the slider thumb
-            if let duration = self.playerView.player?.currentItem?.duration {
-            let durationSeconds = CMTimeGetSeconds(duration)
+            if let duration = self.playerView.player?.currentItem?.asset.duration {
+                let durationSeconds = CMTimeGetSeconds(duration)
                 self.videoSlider.value = Float(seconds / durationSeconds)
             }
         })
@@ -166,7 +166,7 @@ extension PlayerViewController {
         //setup constrains
         containerView.addSubview(videoSlider)
         videoSlider.translatesAutoresizingMaskIntoConstraints = false
-       
+        
         NSLayoutConstraint.activate([
             videoSlider.topAnchor.constraint(equalTo: playerContainerView.bottomAnchor, constant: 30),
             videoSlider.leadingAnchor.constraint(equalTo: containerView.leadingAnchor, constant: 20),
@@ -175,12 +175,12 @@ extension PlayerViewController {
     }
     
     @objc func handleSliderChange() {
+        
         if let duration = playerView.player?.currentItem?.duration {
             let totalSeconds = CMTimeGetSeconds(duration)
             
             let value = Float64(videoSlider.value) * totalSeconds
             let seekTime = CMTime(value: CMTimeValue(value), timescale: 1)
-            
             playerView.player?.seek(to: seekTime, completionHandler: { completedSeek in
                 //do something later
             })

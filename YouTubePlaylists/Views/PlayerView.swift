@@ -35,6 +35,7 @@ class PlayerView: UIView {
     
     private func setUpAsset(with url: URL, completion: ((_ asset: AVAsset) -> Void)?) {
         let asset = AVAsset(url: url)
+        
         asset.loadValuesAsynchronously(forKeys: ["playable"]) {
             var error: NSError? = nil
             let status = asset.statusOfValue(forKey: "playable", error: &error)
