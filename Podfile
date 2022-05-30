@@ -6,6 +6,6 @@ target 'YouTubePlaylists' do
   use_frameworks!
 
   # Pods for YouTubePlaylists
-	pod "DrawerView"
+	
 
 end

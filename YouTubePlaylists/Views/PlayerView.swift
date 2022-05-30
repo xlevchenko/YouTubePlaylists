@@ -27,13 +27,14 @@ class PlayerView: UIView {
         return layer as! AVPlayerLayer
     }
     
-    private var playerItemContext = 0
+     var playerItemContext = 0
 
     // Keep the reference and use it to observe the loading status.
-    private var playerItem: AVPlayerItem?
-
+     var playerItem: AVPlayerItem?
     
-    private func setUpAsset(with url: URL, completion: ((_ asset: AVAsset) -> Void)?) {
+    
+    
+    func setUpAsset(with url: URL, completion: ((_ asset: AVAsset) -> Void)?) {
         let asset = AVAsset(url: url)
         
         asset.loadValuesAsynchronously(forKeys: ["playable"]) {
@@ -53,10 +54,10 @@ class PlayerView: UIView {
     }
     
     
-    private func setUpPlayerItem(with asset: AVAsset) {
+    func setUpPlayerItem(with asset: AVAsset) {
         playerItem = AVPlayerItem(asset: asset)
         playerItem?.addObserver(self, forKeyPath: #keyPath(AVPlayerItem.status), options: [.old, .new], context: &playerItemContext)
-            
+
         DispatchQueue.main.async { [weak self] in
             self?.player = AVPlayer(playerItem: self?.playerItem!)
         }
@@ -81,7 +82,8 @@ class PlayerView: UIView {
             switch status {
             case .readyToPlay:
                 print(".readyToPlay")
-                player?.play()
+                player?.pause()
+                
             case .failed:
                 print(".failed")
             case .unknown:
@@ -96,9 +98,12 @@ class PlayerView: UIView {
     func play(with url: URL) {
         setUpAsset(with: url) { [weak self] (asset: AVAsset) in
             self?.setUpPlayerItem(with: asset)
+            
         }
     }
     
+    
+
     
     deinit {
         playerItem?.removeObserver(self, forKeyPath: #keyPath(AVPlayerItem.status))
