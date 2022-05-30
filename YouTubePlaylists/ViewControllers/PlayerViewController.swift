@@ -24,7 +24,14 @@ class PlayerViewController: UIViewController {
     var videoSlider: UISlider!
     var startVideoLengthLabel: UILabel!
     var endVideoLengthLabel: UILabel!
-    var addPlayPause: UIButton!
+    
+    var nameLable = UILabel()
+    var viewLabel = UILabel()
+    
+    
+    var previousButton = UIButton()
+    var playPauseButton = UIButton()
+    var nextButton = UIButton()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -39,7 +46,8 @@ class PlayerViewController: UIViewController {
         configureVideoSlider()
         configureStartVideoLength()
         configureEndVideoLength()
-        configureAddPlayPause()
+        configureNameLabel()
+        configureControlVideo()
         
     }
 }
@@ -64,6 +72,11 @@ extension PlayerViewController {
                 }
             }
             
+            let seconds = CMTimeGetSeconds(progressTime)
+            let secondString = String(format: "%02d", Int(seconds) % 60)
+            let minutesText = String(format: "%02d", Int(seconds) / 60)
+            self?.startVideoLengthLabel.text = "\(minutesText):\(secondString)"
+            
             if let duration = self?.playerView.player?.currentItem?.duration {
                 let totalSeconds = CMTimeGetSeconds(duration)
                 //change endLable
@@ -71,11 +84,6 @@ extension PlayerViewController {
                 let minutesText = String(format: "%02d", Int(totalSeconds) / 60)
                 self?.endVideoLengthLabel.text = "\(minutesText):\(secondsText)"
             }
-            
-            let seconds = CMTimeGetSeconds(progressTime)
-            let secondString = String(format: "%02d", Int(seconds) % 60)
-            let minutesText = String(format: "%02d", Int(seconds) / 60)
-            self?.startVideoLengthLabel.text = "\(minutesText):\(secondString)"
         }
     }
 }
@@ -224,6 +232,34 @@ extension PlayerViewController {
             startVideoLengthLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20)
         ])
     }
+    
+    func configureNameLabel() {
+        nameLable.text = "Running Back to NEW YORK CITY"
+        nameLable.font = .boldSystemFont(ofSize: 22)
+        nameLable.textColor = .white
+        nameLable.numberOfLines = 1
+    
+        //let viewLabel = UILabel()
+        viewLabel.text = "203 071 views"
+        viewLabel.font = .systemFont(ofSize: 17)
+        viewLabel.textColor = UIColor(red: 1, green: 1, blue: 1, alpha: 0.75)
+        viewLabel.numberOfLines = 1
+    
+        containerView.addSubview(nameLable)
+        nameLable.translatesAutoresizingMaskIntoConstraints = false
+        
+        containerView.addSubview(viewLabel)
+        viewLabel.translatesAutoresizingMaskIntoConstraints = false
+    
+        
+        NSLayoutConstraint.activate([
+            nameLable.topAnchor.constraint(equalTo: videoSlider.bottomAnchor, constant: 60),
+            nameLable.centerXAnchor.constraint(equalTo: containerView.centerXAnchor),
+            
+            viewLabel.topAnchor.constraint(equalTo: nameLable.bottomAnchor, constant: 10),
+            viewLabel.centerXAnchor.constraint(equalTo: containerView.centerXAnchor),
+        ])
+    }
 
     func configureEndVideoLength() {
         endVideoLengthLabel = UILabel()
@@ -236,27 +272,48 @@ extension PlayerViewController {
 
         NSLayoutConstraint.activate([
             endVideoLengthLabel.topAnchor.constraint(equalTo: videoSlider.bottomAnchor, constant: 10),
-            endVideoLengthLabel.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20)
+            endVideoLengthLabel.trailingAnchor.constraint(equalTo: containerView.trailingAnchor, constant: -20)
         ])
     }
     
-    func configureAddPlayPause() {
-        addPlayPause = UIButton()
-        addPlayPause.setImage(UIImage(named: "play"), for: .normal)
-        addPlayPause.addTarget(self, action: #selector(handlePlayVideo), for: .touchUpInside)
+    func configureControlVideo() {
+        playPauseButton.setImage(UIImage(named: "play"), for: .normal)
+        playPauseButton.addTarget(self, action: #selector(handlePlayVideo), for: .touchUpInside)
         
-        containerView.addSubview(addPlayPause)
-        addPlayPause.translatesAutoresizingMaskIntoConstraints = false
+        previousButton.setImage(UIImage(named: "Prev"), for: .normal)
+        
+        nextButton.setImage(UIImage(named: "Next"), for: .normal)
+        
+        //containerView.addSubview(playPauseButton)
+        playPauseButton.translatesAutoresizingMaskIntoConstraints = false
+        
+        //containerView.addSubview(previousButton)
+        previousButton.translatesAutoresizingMaskIntoConstraints = false
+        
+        //containerView.addSubview(nextButton)
+        nextButton.translatesAutoresizingMaskIntoConstraints = false
+        
+       let stackView = UIStackView(arrangedSubviews: [previousButton, playPauseButton, nextButton])
+        stackView.translatesAutoresizingMaskIntoConstraints = false
+        stackView.axis = .horizontal
+        stackView.alignment = .center
+        stackView.distribution = .equalSpacing
+        stackView.spacing = 30
+        containerView.addSubview(stackView)
         
         NSLayoutConstraint.activate([
-            addPlayPause.topAnchor.constraint(equalTo: startVideoLengthLabel.bottomAnchor, constant: 10),
-            addPlayPause.trailingAnchor.constraint(equalTo: view.centerXAnchor)
+            stackView.topAnchor.constraint(equalTo: viewLabel.bottomAnchor, constant: 30),
+            stackView.centerXAnchor.constraint(equalTo: containerView.centerXAnchor, constant: 0),
+            //stackView.heightAnchor.constraint(equalToConstant: 80)
         ])
     }
     
+    
     @objc func handlePlayVideo() {
-        playerView.player?.play()
-        addBoundaryTimeObserver()
+        if ((playerView.player?.play()) != nil) {
+            playPauseButton.setImage(UIImage(named: "Pause"), for: .normal)
+            addBoundaryTimeObserver()
+        }
     }
 }
 
