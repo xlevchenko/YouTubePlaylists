@@ -33,6 +33,10 @@ class PlayerViewController: UIViewController {
     var playPauseButton = UIButton()
     var nextButton = UIButton()
     
+    var minVolume = UIImageView()
+    var volumeSlider = UISlider()
+    var maxVolume = UIImageView()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .clear
@@ -48,7 +52,7 @@ class PlayerViewController: UIViewController {
         configureEndVideoLength()
         configureNameLabel()
         configureControlVideo()
-        
+        configureValume()
     }
 }
 
@@ -281,18 +285,8 @@ extension PlayerViewController {
         playPauseButton.addTarget(self, action: #selector(handlePlayVideo), for: .touchUpInside)
         
         previousButton.setImage(UIImage(named: "Prev"), for: .normal)
-        
         nextButton.setImage(UIImage(named: "Next"), for: .normal)
-        
-        //containerView.addSubview(playPauseButton)
-        playPauseButton.translatesAutoresizingMaskIntoConstraints = false
-        
-        //containerView.addSubview(previousButton)
-        previousButton.translatesAutoresizingMaskIntoConstraints = false
-        
-        //containerView.addSubview(nextButton)
-        nextButton.translatesAutoresizingMaskIntoConstraints = false
-        
+      
        let stackView = UIStackView(arrangedSubviews: [previousButton, playPauseButton, nextButton])
         stackView.translatesAutoresizingMaskIntoConstraints = false
         stackView.axis = .horizontal
@@ -304,16 +298,52 @@ extension PlayerViewController {
         NSLayoutConstraint.activate([
             stackView.topAnchor.constraint(equalTo: viewLabel.bottomAnchor, constant: 30),
             stackView.centerXAnchor.constraint(equalTo: containerView.centerXAnchor, constant: 0),
-            //stackView.heightAnchor.constraint(equalToConstant: 80)
         ])
     }
     
     
     @objc func handlePlayVideo() {
-        if ((playerView.player?.play()) != nil) {
+        if playerView.player?.rate == 0 {
+            playerView.player?.play()
             playPauseButton.setImage(UIImage(named: "Pause"), for: .normal)
             addBoundaryTimeObserver()
+        } else {
+            playerView.player?.pause()
+            playPauseButton.setImage(UIImage(named: "play"), for: .normal)
         }
+    }
+    
+    func configureValume() {
+        minVolume.image = UIImage(named: "Sound_Min")
+        minVolume.clipsToBounds = true
+        minVolume.contentMode = .scaleAspectFill
+       
+        volumeSlider.maximumTrackTintColor = UIColor(red: 1, green: 1, blue: 1, alpha: 0.35)
+        volumeSlider.minimumTrackTintColor = .white
+        volumeSlider.setValue(0.75, animated: true)
+        volumeSlider.addTarget(self, action: #selector(handleVolume), for: .valueChanged)
+        
+        maxVolume.image = UIImage(named: "Sound_Max")
+        maxVolume.clipsToBounds = true
+        maxVolume.contentMode = .scaleAspectFill
+        
+        let stackView = UIStackView(arrangedSubviews: [minVolume, volumeSlider, maxVolume])
+        stackView.translatesAutoresizingMaskIntoConstraints = false
+        stackView.axis = .horizontal
+        stackView.alignment = .center
+        stackView.distribution = .fill
+        stackView.spacing = 10
+        containerView.addSubview(stackView)
+        
+        NSLayoutConstraint.activate([
+            stackView.topAnchor.constraint(equalTo: containerView.bottomAnchor, constant: -150),
+            stackView.leadingAnchor.constraint(equalTo: containerView.leadingAnchor, constant: 20),
+            stackView.trailingAnchor.constraint(equalTo: containerView.trailingAnchor, constant: -20)
+        ])
+    }
+    
+    @objc func handleVolume() {
+        playerView.player?.volume = volumeSlider.value
     }
 }
 
