@@ -188,7 +188,7 @@ extension PlayerViewController {
 }
 
 
-//MARK: Setup Constraint Controls Button and Volume
+//MARK: - Setup Constraint Controls Button and Volume
 extension PlayerViewController {
     func setupConstraintButtonControls() {
         let stackView = UIStackView(arrangedSubviews: [previousButton, playPause, nextVideoButton])

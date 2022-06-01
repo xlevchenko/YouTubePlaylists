@@ -29,19 +29,45 @@ class PlaylistViewController: UIViewController {
     private var currentPage = 0
     private var page = HeaderResults.available.count
     
+    let sessioConfiguration = URLSessionConfiguration.default
+    var session = URLSession.shared
+    let decoder = JSONDecoder()
+    var playlistResult = PlaylistResult(items: [])
 
     override func viewDidLoad() {
         super.viewDidLoad()
         configureCollectionView()
         configureDataSource()
         generateData(animated: false)
-        
         self.timer = Timer.scheduledTimer(timeInterval: 3.0, target: self, selector: #selector(self.changeImage), userInfo: nil, repeats: true)
+        fetchData()
     }
 }
 
 
-//MARK: Configure CollectionView
+//MARK: - Fetch Data
+extension PlaylistViewController {
+    func fetchData() {
+        NetworkManager.shared.fetchHeaderSection { playlistResult, error in
+            
+            if let error = error {
+                print("Failed to featch apps", error)
+            }
+            
+            if let playlistResult = playlistResult {
+                self.playlistResult = playlistResult
+                print(playlistResult.items)
+            }
+            
+            DispatchQueue.main.async {
+                // do something
+            }
+        }
+    }
+}
+
+
+//MARK: - Configure CollectionView
 extension PlaylistViewController {
     private func configureCollectionView() {
         collectionView = UICollectionView(frame: view.bounds, collectionViewLayout: createLayout())
@@ -63,7 +89,7 @@ extension PlaylistViewController {
 }
 
 
-//MARK: Create CompositionalLayout
+//MARK: - Create CompositionalLayout
 extension PlaylistViewController {
     private func topSection(_ sectionIndex: Int) -> NSCollectionLayoutSection {
         let item = NSCollectionLayoutItem.withEntireSize()
@@ -163,7 +189,7 @@ extension PlaylistViewController {
 }
 
 
-//MARK: UICollectionViewDiffableDataSource
+//MARK: - UICollectionViewDiffableDataSource
 extension PlaylistViewController {
     private func configureDataSource() {
         dataSource = DataSource(collectionView: collectionView, cellProvider: { collectionView, indexPath, itemIdentifier in
@@ -224,8 +250,8 @@ extension PlaylistViewController {
         case .first(let first):
             let cell: HeaderViewCell = collectionView.dequeueReusableCell(withReuseIdentifier: HeaderViewCell.reuseIdentifier, for: indexPath) as! HeaderViewCell
             cell.configure(with: first)
+            
             return cell
-        
         case .second(let second):
             let cell: MediumViewCell = collectionView.dequeueReusableCell(withReuseIdentifier: MediumViewCell.reuseIdentifier, for: indexPath) as! MediumViewCell
             cell.configure(with: second)
@@ -240,8 +266,7 @@ extension PlaylistViewController {
 }
 
 
-
-// MARK: UICollectionViewDelegate
+// - MARK: UICollectionViewDelegate
 extension PlaylistViewController: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         guard 0...2 ~= indexPath.section else { return }
@@ -273,7 +298,7 @@ extension PlaylistViewController: UICollectionViewDelegate {
 }
 
 
-//MARK: Configure Autoscroll Header View
+//MARK: - Configure Autoscroll Header View
 extension PlaylistViewController {
     
     @objc private func changeImage() {

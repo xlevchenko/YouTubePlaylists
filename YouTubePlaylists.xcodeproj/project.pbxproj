@@ -24,6 +24,7 @@
 		605399D728316885007444C9 /* PlaylistViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 605399D628316885007444C9 /* PlaylistViewController.swift */; };
 		605399DC28316886007444C9 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 605399DB28316886007444C9 /* Assets.xcassets */; };
 		605399DF28316886007444C9 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 605399DD28316886007444C9 /* LaunchScreen.storyboard */; };
+		607892AC28475A1C003D2411 /* PlaylistResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = 607892AB28475A1C003D2411 /* PlaylistResult.swift */; };
 		60D4C26F283536B700FF7013 /* MediumViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60D4C26E283536B700FF7013 /* MediumViewCell.swift */; };
 		60D4C27128353B0C00FF7013 /* MediumResults.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60D4C27028353B0C00FF7013 /* MediumResults.swift */; };
 		60D4C2752836B9BF00FF7013 /* BottomViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60D4C2742836B9BF00FF7013 /* BottomViewCell.swift */; };
@@ -56,6 +57,7 @@
 		605399DB28316886007444C9 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		605399DE28316886007444C9 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		605399E028316886007444C9 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		607892AB28475A1C003D2411 /* PlaylistResult.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaylistResult.swift; sourceTree = "<group>"; };
 		60D4C26E283536B700FF7013 /* MediumViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MediumViewCell.swift; sourceTree = "<group>"; };
 		60D4C27028353B0C00FF7013 /* MediumResults.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MediumResults.swift; sourceTree = "<group>"; };
 		60D4C2742836B9BF00FF7013 /* BottomViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BottomViewCell.swift; sourceTree = "<group>"; };
@@ -93,6 +95,7 @@
 				601019092833C51B00DF7BA9 /* HeaderResults.swift */,
 				60D4C27028353B0C00FF7013 /* MediumResults.swift */,
 				60D4C2762836BA8D00FF7013 /* BottomResults.swift */,
+				607892AB28475A1C003D2411 /* PlaylistResult.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -303,6 +306,7 @@
 				60E6D4A0283D806D0045FADC /* PlayerViewController.swift in Sources */,
 				60D4C2772836BA8D00FF7013 /* BottomResults.swift in Sources */,
 				601019012832766300DF7BA9 /* LabelHeadrView.swift in Sources */,
+				607892AC28475A1C003D2411 /* PlaylistResult.swift in Sources */,
 				6010190A2833C51B00DF7BA9 /* HeaderResults.swift in Sources */,
 				60D4C27128353B0C00FF7013 /* MediumResults.swift in Sources */,
 				6010190E2833E47F00DF7BA9 /* SimpleFooterView.swift in Sources */,

@@ -45,7 +45,7 @@ class PlayerViewController: UIViewController {
 }
 
 
-//MARK: Configure Player
+//MARK: - Configure Player
 extension PlayerViewController {
     func addBoundaryTimeObserver() {
         playerView.player?.addPeriodicTimeObserver(forInterval: CMTime(seconds: 1, preferredTimescale: 2), queue: DispatchQueue.main) { [weak self] progressTime in
@@ -80,7 +80,7 @@ extension PlayerViewController {
 }
 
 
-//MARK: Configure Container View
+//MARK: - Configure Container View
 extension PlayerViewController {
     private func configureContainerView() {
         containerView = UIView()
@@ -106,7 +106,7 @@ extension PlayerViewController {
 }
 
 
-//MARK: Configure Dismiss Button
+//MARK: - Configure Dismiss Button
 extension PlayerViewController {
     private func configureDismissButton() {
         dismissButton = UIButton(type: .custom)
@@ -132,7 +132,7 @@ extension PlayerViewController {
 }
 
 
-//MARK: Configure Player Container View
+//MARK: - Configure Player Container View
 extension PlayerViewController {
     private func configurePlayerContainerView() {
         playerContainerView = UIView()

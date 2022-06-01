@@ -29,7 +29,7 @@ class ContainerViewController: UIViewController {
 }
 
 
-//MARK: Configure ContainerView
+//MARK: - Configure ContainerView
 extension ContainerViewController {
     private func addPlaylistCollection() {
         addChild(playlistConroller)
@@ -51,7 +51,7 @@ extension ContainerViewController {
 }
 
 
-//MARK: Configure PlayerView
+//MARK: - Configure PlayerView
 extension ContainerViewController {
     private func miniPlayer() {
         view.addSubview(player)
