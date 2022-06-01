@@ -11,31 +11,24 @@ import AVFoundation
 class PlayerViewController: UIViewController {
     
     var containerView: UIView!
-    
     var playerContainerView: UIView!
-    // Reference for the player view.
-    var playerView = PlayerView() //mayby needed frame
-   
+    var dismissButton: UIButton!
+    var playerView = PlayerView() // Reference for the player view.
+    
+    lazy var videoSlider = scrollVideoSlider()
+    lazy var startVideoLengthLabel = startLabel()
+    lazy var endVideoLengthLabel = finishLabel()
+    lazy var nameVideoLable = nameLable()
+    lazy var viewLabel = countViewsLabel()
+    lazy var previousButton = prevButton()
+    lazy var playPause = playPauseButton()
+    lazy var nextVideoButton = nextButton()
+    lazy var minVolume = minimumVolume()
+    lazy var volumeSlider = controlVolumeSlider()
+    lazy var maxVolume = maximumVolume()
+    
     // URL for the test video.
     private let videoURL = "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4"
-    
-    var dismissButton: UIButton!
-    
-    var videoSlider: UISlider!
-    var startVideoLengthLabel: UILabel!
-    var endVideoLengthLabel: UILabel!
-    
-    var nameLable = UILabel()
-    var viewLabel = UILabel()
-    
-    
-    var previousButton = UIButton()
-    var playPauseButton = UIButton()
-    var nextButton = UIButton()
-    
-    var minVolume = UIImageView()
-    var volumeSlider = UISlider()
-    var maxVolume = UIImageView()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -46,16 +39,10 @@ class PlayerViewController: UIViewController {
         configureDismissButton()
         configurePlayerView()
         playVideo()
-        
-        configureVideoSlider()
-        configureStartVideoLength()
-        configureEndVideoLength()
-        configureNameLabel()
-        configureControlVideo()
-        configureValume()
+        setupConstraintButtonControls()
+        setupConstraintVolumeControlrs()
     }
 }
-
 
 
 //MARK: Configure Player
@@ -93,7 +80,7 @@ extension PlayerViewController {
 }
 
 
-//MARK: Configure UIView
+//MARK: Configure Container View
 extension PlayerViewController {
     private func configureContainerView() {
         containerView = UIView()
@@ -150,11 +137,11 @@ extension PlayerViewController {
     private func configurePlayerContainerView() {
         playerContainerView = UIView()
         playerContainerView.backgroundColor = .black
-
+        
         //setup constrains
         containerView.addSubview(playerContainerView)
         playerContainerView.translatesAutoresizingMaskIntoConstraints = false
-
+        
         NSLayoutConstraint.activate([
             playerContainerView.topAnchor.constraint(equalTo: containerView.topAnchor, constant: 50),
             playerContainerView.leadingAnchor.constraint(equalTo: containerView.leadingAnchor, constant: 0),
@@ -164,11 +151,10 @@ extension PlayerViewController {
     }
     
     private func configurePlayerView() {
-
         //setup constrains
         playerContainerView.addSubview(playerView)
         playerView.translatesAutoresizingMaskIntoConstraints = false
-
+        
         NSLayoutConstraint.activate([
             playerView.leadingAnchor.constraint(equalTo: playerContainerView.leadingAnchor),
             playerView.trailingAnchor.constraint(equalTo: playerContainerView.trailingAnchor),
@@ -180,172 +166,10 @@ extension PlayerViewController {
     func playVideo() {
         guard let url = URL(string: videoURL) else { return }
         playerView.play(with: url)
-        
-        
-        
     }
 }
 
 
-extension PlayerViewController {
-    private func configureVideoSlider() {
-        videoSlider = UISlider()
-        videoSlider.maximumTrackTintColor = UIColor(red: 1, green: 1, blue: 1, alpha: 0.35)
-        videoSlider.minimumTrackTintColor = .white
-        videoSlider.setThumbImage(UIImage(named: "line"), for: .normal)
-        videoSlider.addTarget(self, action: #selector(handleSliderChange), for: .valueChanged)
-
-        //setup constrains
-        containerView.addSubview(videoSlider)
-        videoSlider.translatesAutoresizingMaskIntoConstraints = false
-
-        NSLayoutConstraint.activate([
-            videoSlider.topAnchor.constraint(equalTo: playerContainerView.bottomAnchor, constant: 30),
-            videoSlider.leadingAnchor.constraint(equalTo: containerView.leadingAnchor, constant: 20),
-            videoSlider.trailingAnchor.constraint(equalTo: containerView.trailingAnchor, constant: -20)
-        ])
-    }
-
-    
-    @objc func handleSliderChange() {
-        
-        if let duration = playerView.player?.currentItem?.duration {
-            let totalSeconds = CMTimeGetSeconds(duration)
-            
-            let value = Float64(videoSlider.value) * totalSeconds
-            let seekTime = CMTime(value: CMTimeValue(value), timescale: 1)
-            playerView.player?.seek(to: seekTime, completionHandler: { completedSeek in
-                //do something later
-            })
-        }
-    }
-
-    
-    func configureStartVideoLength() {
-        startVideoLengthLabel = UILabel()
-        startVideoLengthLabel.text = "00:00"
-        startVideoLengthLabel.textColor = UIColor(red: 1, green: 1, blue: 1, alpha: 0.75)
-
-
-        //setup constrains
-        containerView.addSubview(startVideoLengthLabel)
-        startVideoLengthLabel.translatesAutoresizingMaskIntoConstraints = false
-
-        NSLayoutConstraint.activate([
-            startVideoLengthLabel.topAnchor.constraint(equalTo: videoSlider.bottomAnchor, constant: 10),
-            startVideoLengthLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20)
-        ])
-    }
-    
-    func configureNameLabel() {
-        nameLable.text = "Running Back to NEW YORK CITY"
-        nameLable.font = .boldSystemFont(ofSize: 22)
-        nameLable.textColor = .white
-        nameLable.numberOfLines = 1
-    
-        //let viewLabel = UILabel()
-        viewLabel.text = "203 071 views"
-        viewLabel.font = .systemFont(ofSize: 17)
-        viewLabel.textColor = UIColor(red: 1, green: 1, blue: 1, alpha: 0.75)
-        viewLabel.numberOfLines = 1
-    
-        containerView.addSubview(nameLable)
-        nameLable.translatesAutoresizingMaskIntoConstraints = false
-        
-        containerView.addSubview(viewLabel)
-        viewLabel.translatesAutoresizingMaskIntoConstraints = false
-    
-        
-        NSLayoutConstraint.activate([
-            nameLable.topAnchor.constraint(equalTo: videoSlider.bottomAnchor, constant: 60),
-            nameLable.centerXAnchor.constraint(equalTo: containerView.centerXAnchor),
-            
-            viewLabel.topAnchor.constraint(equalTo: nameLable.bottomAnchor, constant: 10),
-            viewLabel.centerXAnchor.constraint(equalTo: containerView.centerXAnchor),
-        ])
-    }
-
-    func configureEndVideoLength() {
-        endVideoLengthLabel = UILabel()
-        endVideoLengthLabel.text = "00:00"
-        endVideoLengthLabel.textColor = UIColor(red: 1, green: 1, blue: 1, alpha: 0.75)
-
-        //setup constrains
-        containerView.addSubview(endVideoLengthLabel)
-        endVideoLengthLabel.translatesAutoresizingMaskIntoConstraints = false
-
-        NSLayoutConstraint.activate([
-            endVideoLengthLabel.topAnchor.constraint(equalTo: videoSlider.bottomAnchor, constant: 10),
-            endVideoLengthLabel.trailingAnchor.constraint(equalTo: containerView.trailingAnchor, constant: -20)
-        ])
-    }
-    
-    func configureControlVideo() {
-        playPauseButton.setImage(UIImage(named: "play"), for: .normal)
-        playPauseButton.addTarget(self, action: #selector(handlePlayVideo), for: .touchUpInside)
-        
-        previousButton.setImage(UIImage(named: "Prev"), for: .normal)
-        nextButton.setImage(UIImage(named: "Next"), for: .normal)
-      
-       let stackView = UIStackView(arrangedSubviews: [previousButton, playPauseButton, nextButton])
-        stackView.translatesAutoresizingMaskIntoConstraints = false
-        stackView.axis = .horizontal
-        stackView.alignment = .center
-        stackView.distribution = .equalSpacing
-        stackView.spacing = 30
-        containerView.addSubview(stackView)
-        
-        NSLayoutConstraint.activate([
-            stackView.topAnchor.constraint(equalTo: viewLabel.bottomAnchor, constant: 30),
-            stackView.centerXAnchor.constraint(equalTo: containerView.centerXAnchor, constant: 0),
-        ])
-    }
-    
-    
-    @objc func handlePlayVideo() {
-        if playerView.player?.rate == 0 {
-            playerView.player?.play()
-            playPauseButton.setImage(UIImage(named: "Pause"), for: .normal)
-            addBoundaryTimeObserver()
-        } else {
-            playerView.player?.pause()
-            playPauseButton.setImage(UIImage(named: "play"), for: .normal)
-        }
-    }
-    
-    func configureValume() {
-        minVolume.image = UIImage(named: "Sound_Min")
-        minVolume.clipsToBounds = true
-        minVolume.contentMode = .scaleAspectFill
-       
-        volumeSlider.maximumTrackTintColor = UIColor(red: 1, green: 1, blue: 1, alpha: 0.35)
-        volumeSlider.minimumTrackTintColor = .white
-        volumeSlider.setValue(0.75, animated: true)
-        volumeSlider.addTarget(self, action: #selector(handleVolume), for: .valueChanged)
-        
-        maxVolume.image = UIImage(named: "Sound_Max")
-        maxVolume.clipsToBounds = true
-        maxVolume.contentMode = .scaleAspectFill
-        
-        let stackView = UIStackView(arrangedSubviews: [minVolume, volumeSlider, maxVolume])
-        stackView.translatesAutoresizingMaskIntoConstraints = false
-        stackView.axis = .horizontal
-        stackView.alignment = .center
-        stackView.distribution = .fill
-        stackView.spacing = 10
-        containerView.addSubview(stackView)
-        
-        NSLayoutConstraint.activate([
-            stackView.topAnchor.constraint(equalTo: containerView.bottomAnchor, constant: -150),
-            stackView.leadingAnchor.constraint(equalTo: containerView.leadingAnchor, constant: 20),
-            stackView.trailingAnchor.constraint(equalTo: containerView.trailingAnchor, constant: -20)
-        ])
-    }
-    
-    @objc func handleVolume() {
-        playerView.player?.volume = volumeSlider.value
-    }
-}
 
 
 

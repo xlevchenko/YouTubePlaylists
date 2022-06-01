@@ -52,7 +52,7 @@ class HeaderViewCell: UICollectionViewCell {
         fatalError("init(coder:) has not been implemented")
     }
     
-    func configure(with first: HeaderSectionModel) {
+    func configure(with first: HeaderResults) {
         imageView.image = first.image
         //playButton.
         channelNameLable.text = first.channelNameLable

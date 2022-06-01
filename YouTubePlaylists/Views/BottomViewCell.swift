@@ -46,7 +46,7 @@ class BottomViewCell: UICollectionViewCell {
     }
     
     
-    func configure(with medium: BottomSectionModel) {
+    func configure(with medium: BottomResults) {
         imageView.image = medium.image
         channelNameLable.text = medium.channelNameLable
         countViewsLable.text = medium.countViews

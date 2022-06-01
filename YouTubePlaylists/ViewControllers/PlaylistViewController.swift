@@ -20,14 +20,14 @@ class PlaylistViewController: UIViewController {
     
     
     enum SectionItem: Hashable {
-        case first(HeaderSectionModel)
-        case second(MediumSectionModel)
-        case third(BottomSectionModel)
+        case first(HeaderResults)
+        case second(MediumResults)
+        case third(BottomResults)
     }
     
     private var timer: Timer!
     private var currentPage = 0
-    private var page = HeaderSectionModel.available.count
+    private var page = HeaderResults.available.count
     
 
     override func viewDidLoad() {
@@ -212,9 +212,9 @@ extension PlaylistViewController {
         
         snapshot.appendSections(sections)
     
-        snapshot.appendItems(HeaderSectionModel.available.map(SectionItem.first), toSection: sections[0])
-        snapshot.appendItems(MediumSectionModel.available.map(SectionItem.second), toSection: sections[1])
-        snapshot.appendItems(BottomSectionModel.available.map(SectionItem.third), toSection: sections[2])
+        snapshot.appendItems(HeaderResults.available.map(SectionItem.first), toSection: sections[0])
+        snapshot.appendItems(MediumResults.available.map(SectionItem.second), toSection: sections[1])
+        snapshot.appendItems(BottomResults.available.map(SectionItem.third), toSection: sections[2])
         dataSource.apply(snapshot, animatingDifferences: animated)
     }
     
@@ -250,8 +250,8 @@ extension PlaylistViewController: UICollectionViewDelegate {
         let vc: UIViewController?
         
         switch item {
-        case .first(let headerSectionModel):
-            switch headerSectionModel.playlist {
+        case .first(let headerResults):
+            switch headerResults.playlist {
             case .one:
                 vc = PlayerViewController()
             case .two:
@@ -278,7 +278,7 @@ extension PlaylistViewController {
     
     @objc private func changeImage() {
 
-        if currentPage < HeaderSectionModel.available.count {
+        if currentPage < HeaderResults.available.count {
             let index = IndexPath.init(item: currentPage, section: 0)
             self.collectionView.scrollToItem(at: index, at: .top, animated: true)
             currentPage += 1

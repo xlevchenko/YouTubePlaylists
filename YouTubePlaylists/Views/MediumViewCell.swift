@@ -46,7 +46,7 @@ class MediumViewCell: UICollectionViewCell {
     }
     
     
-    func configure(with medium: MediumSectionModel) {
+    func configure(with medium: MediumResults) {
         imageView.image = medium.image
         channelNameLable.text = medium.channelNameLable
         countViewsLable.text = medium.countViews
